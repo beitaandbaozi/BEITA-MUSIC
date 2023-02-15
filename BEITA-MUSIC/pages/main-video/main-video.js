@@ -1,18 +1,28 @@
-// pages/main-video/main-video.js
+import {
+  beitaRequest
+} from '../../servers/beita-request'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    videoList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    beitaRequest.get(
+       "top/mv",
+      {
+        limit: 20,
+        offset: 0
+      }
+    ).then(res => {
+      console.log('res', res)
+    })
   },
 
   /**
