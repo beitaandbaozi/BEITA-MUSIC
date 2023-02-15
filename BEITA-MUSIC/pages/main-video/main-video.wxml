@@ -1,2 +1,4 @@
 <!--pages/main-video/main-video.wxml-->
-<text>pages/main-video/main-video.wxml</text>
+<block wx:for="{{videoList}}" wx:key="id">
+  <text>{{item.name}}</text>
+</block>
