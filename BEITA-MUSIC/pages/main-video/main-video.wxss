@@ -10,3 +10,8 @@
 .item {
   width: 48%;
 }
+
+.loaded-type {
+  text-align: center;
+  color: lightseagreen;
+}

@@ -1,6 +1,12 @@
 <!--pages/main-video/main-video.wxml-->
 <view class="main-video">
   <block wx:for="{{videoList}}" wx:key="id">
-    <video-item videoItem="{{item}}" class="item"/>
+    <video-item videoItem="{{item}}" class="item" />
+  </block>
+  <!-- 加载完成 -->
+  <block wx:if="!{{hasMore}}">
+    <view class="loaded-type">
+      ✔✔✔ 已经加载完全部数据啦 ❗❗❗
+    </view>
   </block>
 </view>

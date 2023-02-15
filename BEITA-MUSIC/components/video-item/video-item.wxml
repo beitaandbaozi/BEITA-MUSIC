@@ -7,7 +7,7 @@
     <!-- 播放了以及MV时间 -->
     <view class="info">
       <view class="count">
-        {{format.formatCount(videoItem.playCount)}}
+        {{format.formatCount(videoItem.playCount)}} 
       </view>
       <view>{{format.formatMvTime(videoItem.mv.videos[0].duration)}}</view>
     </view>

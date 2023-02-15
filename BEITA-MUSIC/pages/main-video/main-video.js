@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    videoList: []
+    videoList: [],
+    // 偏移量
+    offset: 0,
+    // 是否已经全部加载完成
+    hasMore: true
   },
 
   /**
@@ -19,9 +23,21 @@ Page({
 
   // 获取所有的视频数据
   async getAllVedio() {
-    const res = await getTopMvList()
+    // 1.获取数据
+    const res = await getTopMvList(20,this.data.offset)
+    // 2.拼接之前的数据
+    const newVideoList = [...this.data.videoList, ...res.data]
     this.setData({
-      videoList: res.data
+      videoList: newVideoList
     })
+    this.data.offset = this.data.videoList.length
+    this.data.hasMore = res.hasMore
   },
+
+  // 上拉加载
+  onReachBottom() {
+    // 如果已经全部加载完成，就不去请求
+    if(!this.data.hasMore) return;
+    this.getAllVedio()
+  }
 })
