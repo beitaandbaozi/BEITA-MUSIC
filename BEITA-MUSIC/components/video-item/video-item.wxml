@@ -1,0 +1,18 @@
+<!--components/video-item/video-item.wxml-->
+<view class="video-item">
+  <view class="album">
+    <!-- 图片 -->
+    <image src="{{videoItem.cover}}" mode="widthFix" class="image"/>
+    <!-- 播放了以及MV时间 -->
+    <view class="info">
+      <view class="count">
+        {{videoItem.playCount}}
+      </view>
+      <view>{{videoItem.mv.videos[0].duration}}</view>
+    </view>
+  </view>
+  <!-- MV信息 -->
+  <view class="content">
+    {{videoItem.name}} - {{videoItem.artistName}}
+  </view>
+</view>

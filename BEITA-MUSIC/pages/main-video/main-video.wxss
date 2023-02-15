@@ -1,1 +1,12 @@
 /* pages/main-video/main-video.wxss */
+
+.main-video {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 25rpx;
+}
+
+.item {
+  width: 48%;
+}

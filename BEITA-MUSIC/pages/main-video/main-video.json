@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "video-item": "/components/video-item/video-item"
+  },
   "navigationBarTitleText": "BEITAVIDEO"
 }
