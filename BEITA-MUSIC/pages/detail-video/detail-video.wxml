@@ -1,29 +1,31 @@
 <!-- 计算属性 -->
-<wxs src="../../utils/format.wxs" module="format"/>
+<wxs src="../../utils/format.wxs" module="format" />
 <view class="detail-video">
   <!-- 视频 -->
-  <video class="video" src="{{mvUrl}}" autoplay show-mute-btn />
+  <video class="video" src="{{mvUrl}}" autoplay show-mute-btn referrer-policy="origin" />
   <!-- MV信息 -->
-  <view class="mv-info">
-    <!-- 标题 -->
-    <view class="title">
-      {{mvInfo.name}}
+  <scroll-view class="scroll-container" scroll-y>
+    <view class="mv-info">
+      <!-- 标题 -->
+      <view class="title">
+        {{mvInfo.name}}
+      </view>
+      <!-- 作者 -->
+      <view class="author">
+        {{mvInfo.artistName}} - {{ mvInfo.alias[0] }}
+      </view>
+      <!-- 播放次数以及发布时间 -->
+      <view class="count-and-time">
+        {{format.formatCount(mvInfo.playCount)}}次播放 - {{mvInfo.publishTime}}
+      </view>
     </view>
-    <!-- 作者 -->
-    <view class="author">
-      {{mvInfo.artistName}} - {{ mvInfo.alias[0] }}
+    <!-- 推荐视频 -->
+    <view class="recommend">
+      <view class="title">推荐视频</view>
+      <!-- 推荐视频列表 -->
+      <block wx:for="{{recommendList}}" wx:key="vid">
+        <video-recommend videoItem="{{item}}" />
+      </block>
     </view>
-    <!-- 播放次数以及发布时间 -->
-    <view class="count-and-time">
-      {{format.formatCount(mvInfo.playCount)}}次播放 - {{mvInfo.publishTime}}
-    </view>
-  </view>
-  <!-- 推荐视频 -->
-  <view class="recommend">
-    <view class="title">推荐视频</view>
-    <!-- 推荐视频列表 -->
-    <block wx:for="{{recommendList}}" wx:key="vid">
-      <video-recommend videoItem="{{item}}"/>
-    </block>
-  </view>
+  </scroll-view>
 </view>

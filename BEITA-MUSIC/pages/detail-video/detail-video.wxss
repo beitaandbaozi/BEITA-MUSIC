@@ -1,5 +1,12 @@
+.detail-video {
+  height: 100vh;
+}
 .video {
   width: 100%;
+}
+
+.scroll-container {
+  height: calc(100% - 225px);
 }
 
 .mv-info {
@@ -20,6 +27,7 @@
   margin-top: 10rpx;
   color: #666;
 }
+
 
 .recommend {
   padding: 30rpx;
