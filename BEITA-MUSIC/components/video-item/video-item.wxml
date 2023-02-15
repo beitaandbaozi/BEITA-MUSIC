@@ -1,6 +1,6 @@
 <!-- 引入计算属性 -->
 <wxs src="../../utils/format.wxs" module="format"/>
-<view class="video-item">
+<view class="video-item" bindtap="handleToDetails">
   <view class="album">
     <!-- 图片 -->
     <image src="{{videoItem.cover}}" mode="widthFix" class="image"/>

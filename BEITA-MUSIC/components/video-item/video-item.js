@@ -21,6 +21,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // 条状到详情页
+    handleToDetails() {
+      let item = this.properties.videoItem
+      wx.navigateTo({
+        url: `/pages/detail-video/detail-video?id=${item.id}`,
+      })
+    }
   }
 })
