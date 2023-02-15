@@ -21,4 +21,4 @@ BEITAREQUTEST.prototype.get = function(url, params) {
 BEITAREQUTEST.prototype.post = function(url, params) {
   return this.request(url, "POST", params)
 }
-export const beitaRequest = new BEITAREQUTEST('http://codercba.com:9002/')
+export const beitaRequest = new BEITAREQUTEST('http://codercba.com:9002')

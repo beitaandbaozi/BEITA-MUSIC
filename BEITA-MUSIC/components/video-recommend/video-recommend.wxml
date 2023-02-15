@@ -1,0 +1,14 @@
+<!-- 计算属性 -->
+<wxs src="../../utils/format.wxs" module="format" />
+<view class="video-recommend">
+  <view class="album">
+    <image class="image" mode="widthFix" src="{{videoItem.coverUrl}}"></image>
+    <view class="info">
+      <text class="count">{{format.formatCount(videoItem.playTime)}}</text>
+    </view>
+  </view>
+  <view class="content">
+    <view class="title">{{videoItem.title}}</view>
+    <view class="nickname">{{videoItem.creator[0].userName}}</view>
+  </view>
+</view>

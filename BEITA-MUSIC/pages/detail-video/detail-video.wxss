@@ -1,1 +1,30 @@
-/* pages/detail-video/detail-video.wxss */
+.video {
+  width: 100%;
+}
+
+.mv-info {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mv-info .title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.mv-info .author,
+.mv-info .count-and-time {
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  color: #666;
+}
+
+.recommend {
+  padding: 30rpx;
+}
+
+.recommend .title {
+  margin-bottom: 20rpx;
+}
