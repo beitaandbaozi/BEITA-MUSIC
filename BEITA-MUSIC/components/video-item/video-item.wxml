@@ -1,4 +1,5 @@
-<!--components/video-item/video-item.wxml-->
+<!-- 引入计算属性 -->
+<wxs src="../../utils/format.wxs" module="format"/>
 <view class="video-item">
   <view class="album">
     <!-- 图片 -->
@@ -6,9 +7,9 @@
     <!-- 播放了以及MV时间 -->
     <view class="info">
       <view class="count">
-        {{videoItem.playCount}}
+        {{format.formatCount(videoItem.playCount)}}
       </view>
-      <view>{{videoItem.mv.videos[0].duration}}</view>
+      <view>{{format.formatMvTime(videoItem.mv.videos[0].duration)}}</view>
     </view>
   </view>
   <!-- MV信息 -->
