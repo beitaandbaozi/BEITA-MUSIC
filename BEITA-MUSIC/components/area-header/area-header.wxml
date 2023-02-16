@@ -1,6 +1,6 @@
 <view class="area-header">
   <view class="title">{{title}}</view>
-  <view class="more">
+  <view class="more" bindtap="handleToMore">
     <text class="text">更多</text>
     <van-icon name="arrow" />
   </view>

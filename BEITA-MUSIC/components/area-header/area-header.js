@@ -25,6 +25,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // 点击更多
+    handleToMore() {
+      this.triggerEvent('toMoreMusic')
+    }
   }
 })

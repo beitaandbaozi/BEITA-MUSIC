@@ -49,5 +49,9 @@ Page({
         bannerHeight: res[0].height
       })
     })
+  },
+  // 跳转到更多页面
+  handleToMoreMusic() {
+    console.log('====')
   }
 })
