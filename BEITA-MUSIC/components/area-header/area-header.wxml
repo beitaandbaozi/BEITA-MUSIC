@@ -1,0 +1,7 @@
+<view class="area-header">
+  <view class="title">{{title}}</view>
+  <view class="more">
+    <text class="text">更多</text>
+    <van-icon name="arrow" />
+  </view>
+</view>

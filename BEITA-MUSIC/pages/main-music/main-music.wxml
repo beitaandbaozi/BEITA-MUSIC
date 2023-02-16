@@ -2,13 +2,15 @@
   <!-- 搜索框 -->
   <van-search value="{{ searchValue }}" shape="round" background="#fafafa" placeholder="请输入歌曲名" bind:click-input="handleToSearch" />
   <!-- 轮播图 -->
-  <swiper class="banner" autoplay indicator-dots circular
-  style="height:{{bannerHeight}}px">
+  <swiper class="banner" autoplay indicator-dots circular style="height:{{bannerHeight}}px">
     <block wx:for="{{bannerList}}" wx:key="targetId">
       <swiper-item class="item">
-        <image class="image" src="{{item.imageUrl}}" mode="widthFix"
-        bindload="handleComputedBunnerHeight"></image>
+        <image class="image" src="{{item.imageUrl}}" mode="widthFix" bindload="handleComputedBunnerHeight"></image>
       </swiper-item>
     </block>
   </swiper>
+  <!-- 推荐歌曲 -->
+  <view class="recommend">
+    <area-header title="推荐歌曲" />
+  </view>
 </view>
