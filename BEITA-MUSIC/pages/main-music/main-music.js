@@ -37,8 +37,6 @@ Page({
       })
     })
     // 获取推荐歌曲列表
-
-    // 发起actions获取数值
     recommendStore.dispatch("fetchRecommendMusicList")
     recommendStore.onState("recommendMusicInfo", (value) => {
       // 取出前六个数据
@@ -75,6 +73,8 @@ Page({
   },
   // 跳转到更多页面
   handleToMoreMusic() {
-    console.log('====')
+    wx.navigateTo({
+      url: '/pages/detail-recommend/detail-recommend',
+    })
   }
 })
