@@ -2,6 +2,7 @@
   "navigationBarBackgroundColor": "#fafafa",
   "usingComponents": {
     "van-search": "@vant/weapp/search/index",
-    "area-header": "/components/area-header/area-header"
+    "area-header": "/components/area-header/area-header",
+    "recommend-item": "/components/recommend-item/recommend-item"
   }
 }

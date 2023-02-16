@@ -1,0 +1,35 @@
+.recommend-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;  
+}
+
+.main-info {
+  display: flex;
+  align-items: center;
+}
+
+.main-info image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+}
+
+.main-info .info {
+  margin-left: 20rpx;
+}
+
+.main-info .info .title {
+  font-size: 36rpx;
+  margin-bottom: 15rpx;
+}
+
+.main-info .info .author {
+  color: #888;
+  font-size: 28rpx;
+}
+
+.more {
+  color: #888;
+}

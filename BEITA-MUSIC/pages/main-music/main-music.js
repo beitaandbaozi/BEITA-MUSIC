@@ -1,5 +1,6 @@
 import {
-  getBunnerList
+  getBunnerList,
+  getRecommendList
 } from '../../api/music/music'
 
 import {
@@ -19,7 +20,9 @@ Page({
     // 轮播图数据
     bannerList: [],
     // 轮播图高度
-    bannerHeight: 150
+    bannerHeight: 150,
+    // 推荐歌曲列表
+    recommendList: []
   },
   onLoad() {
     this.featchData()
@@ -30,6 +33,14 @@ Page({
     getBunnerList().then(res => {
       this.setData({
         bannerList: res.banners
+      })
+    })
+    // 获取推荐歌曲列表
+    getRecommendList().then(res => {
+      // 取出前六个数据
+      const musicList = res.playlist.tracks.slice(0, 6)
+      this.setData({
+        recommendList: musicList
       })
     })
   },

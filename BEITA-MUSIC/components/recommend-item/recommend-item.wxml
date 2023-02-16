@@ -1,0 +1,15 @@
+<view class="recommend-list">
+  <view class="main-info">
+    <!-- 图片 -->
+    <image class="image" src="{{itemData.al.picUrl}}" mode="widthFix" />
+    <!-- 信息 -->
+    <view class="info">
+      <view class="title">{{itemData.name}}</view>
+      <view class="author">{{itemData.ar[0].name}}</view>
+    </view>
+  </view>
+  <view class="more">
+    <!-- icon图标 -->
+    <van-icon name="arrow" />
+  </view>
+</view>
