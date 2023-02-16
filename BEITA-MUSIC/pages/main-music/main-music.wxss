@@ -1,1 +1,5 @@
-/* pages/main-music/main-music.wxss */
+page {
+  background: #fafafa;
+  /* 更改Search框背景颜色 */
+  --search-background-color: #fff
+}
