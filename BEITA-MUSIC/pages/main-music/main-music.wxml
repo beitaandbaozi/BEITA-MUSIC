@@ -18,4 +18,15 @@
       </block>
     </view>
   </view>
+  <!-- 热门歌曲 -->
+  <view class="hot-music-list">
+    <area-header title="热门歌曲" />
+    <scroll-view scroll-x enable-flex class="hot-music-scroll" style="width:{{screenWidth}}px">
+      <block wx:for="{{hotMusicList}}" wx:key="id">
+        <view class="item">
+          <hot-music-item itemData="{{item}}" />
+        </view>
+      </block>
+    </scroll-view>
+  </view>
 </view>

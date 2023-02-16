@@ -3,6 +3,7 @@
   "usingComponents": {
     "van-search": "@vant/weapp/search/index",
     "area-header": "/components/area-header/area-header",
-    "recommend-item": "/components/recommend-item/recommend-item"
+    "recommend-item": "/components/recommend-item/recommend-item",
+    "hot-music-item": "/components/hot-music-item/hot-music-item"
   }
 }

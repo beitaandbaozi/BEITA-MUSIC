@@ -1,5 +1,6 @@
 import {
   getBunnerList,
+  getHotMuiscList
 } from '../../api/music/music'
 
 import {
@@ -10,6 +11,7 @@ import {
 import recommendStore from '../../store/recommend-store'
 
 const querySelectThrottle = beitaThrottle(querySelect, 100)
+const app = getApp()
 Page({
 
   /**
@@ -23,11 +25,19 @@ Page({
     // 轮播图高度
     bannerHeight: 150,
     // 推荐歌曲列表
-    recommendList: []
+    recommendList: [],
+    // 热门歌曲列表
+    hotMusicList: [],
+    // 设备宽度
+    screenWidth: 375
   },
   onLoad() {
     this.featchData()
+    this.setData({
+      screenWidth: app.globalData.screenWidth
+    })
   },
+
   // 获取页面请求数据
   featchData() {
     // 获取轮播图数据
@@ -39,20 +49,18 @@ Page({
     // 获取推荐歌曲列表
     recommendStore.dispatch("fetchRecommendMusicList")
     recommendStore.onState("recommendMusicInfo", (value) => {
-      // 取出前六个数据
-      const newValue = value.slice(0, 6)
+      if (!value.tracks) return
       // 更改数值
       this.setData({
-        recommendList: newValue
+        recommendList: value.tracks.slice(0, 6)
       })
     })
-    // getRecommendList().then(res => {
-    //   // 取出前六个数据
-    //   const musicList = res.playlist.tracks.slice(0, 6)
-    //   this.setData({
-    //     recommendList: musicList
-    //   })
-    // })
+    // 获取热门歌曲列表
+    getHotMuiscList().then(res => {
+      this.setData({
+        hotMusicList: res.playlists
+      })
+    })
   },
   // 点击搜索框跳转到搜索页面
   handleToSearch() {
@@ -75,6 +83,16 @@ Page({
   handleToMoreMusic() {
     wx.navigateTo({
       url: '/pages/detail-recommend/detail-recommend',
+    })
+  },
+
+  onUnload() {
+    recommendStore.offState("recommendMusicInfo", (value) => {
+      if (!value.tracks) return
+      // 更改数值
+      this.setData({
+        recommendList: value.tracks.slice(0, 6)
+      })
     })
   }
 })

@@ -18,7 +18,7 @@ const recommendStore = new HYEventStore({
     // 获取推荐歌曲
     fetchRecommendMusicList(ctx) {
       getRecommendList().then(res => {
-        ctx.recommendMusicInfo = res.playlist.tracks
+        ctx.recommendMusicInfo = res.playlist
       })
     }
   }
