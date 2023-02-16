@@ -1,12 +1,13 @@
 import {
   getBunnerList,
-  getRecommendList
 } from '../../api/music/music'
 
 import {
   querySelect,
   beitaThrottle
 } from "../../utils/common"
+
+import recommendStore from '../../store/recommend-store'
 
 const querySelectThrottle = beitaThrottle(querySelect, 100)
 Page({
@@ -36,13 +37,24 @@ Page({
       })
     })
     // 获取推荐歌曲列表
-    getRecommendList().then(res => {
+
+    // 发起actions获取数值
+    recommendStore.dispatch("fetchRecommendMusicList")
+    recommendStore.onState("recommendMusicInfo", (value) => {
       // 取出前六个数据
-      const musicList = res.playlist.tracks.slice(0, 6)
+      const newValue = value.slice(0, 6)
+      // 更改数值
       this.setData({
-        recommendList: musicList
+        recommendList: newValue
       })
     })
+    // getRecommendList().then(res => {
+    //   // 取出前六个数据
+    //   const musicList = res.playlist.tracks.slice(0, 6)
+    //   this.setData({
+    //     recommendList: musicList
+    //   })
+    // })
   },
   // 点击搜索框跳转到搜索页面
   handleToSearch() {
