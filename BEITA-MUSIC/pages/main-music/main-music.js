@@ -1,6 +1,13 @@
 import {
   getBunnerList
 } from '../../api/music/music'
+
+import {
+  querySelect,
+  beitaThrottle
+} from "../../utils/common"
+
+const querySelectThrottle = beitaThrottle(querySelect, 100)
 Page({
 
   /**
@@ -10,7 +17,9 @@ Page({
     // 搜索词
     searchValue: '',
     // 轮播图数据
-    bannerList: []
+    bannerList: [],
+    // 轮播图高度
+    bannerHeight: 150
   },
   onLoad() {
     this.featchData()
@@ -28,6 +37,17 @@ Page({
   handleToSearch() {
     wx.navigateTo({
       url: '/pages/detail-search/detail-search',
+    })
+  },
+  // 动态计算轮播图的高度，使其与图片的高度一样
+  // 执行频率过高，使用节流来优化
+  handleComputedBunnerHeight() {
+    // 1.获取图片组件的高度
+    // 2.设置高度
+    querySelectThrottle('.image').then(res => {
+      this.setData({
+        bannerHeight: res[0].height
+      })
     })
   }
 })
