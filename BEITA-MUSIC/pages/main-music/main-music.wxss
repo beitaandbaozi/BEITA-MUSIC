@@ -1,5 +1,20 @@
 page {
-  background: #fafafa;
   /* 更改Search框背景颜色 */
-  --search-background-color: #fff
+  --search-background-color: #fff;
+  /* 更改Search框padding */
+  --search-padding: 10px 0;
+
+  box-sizing: border-box;
+  padding: 0 24rpx;
+  background: #fafafa;
+}
+
+.main-music .banner {
+  border-radius: 12rpx;
+  /* 高度超出，导致radius异常 */
+  overflow: hidden;
+}
+
+.main-music .banner .item .image {
+  width: 100%;
 }
