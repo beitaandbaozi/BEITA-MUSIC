@@ -1,7 +1,9 @@
 <view class="area-header">
   <view class="title">{{title}}</view>
-  <view class="more" bindtap="handleToMore">
-    <text class="text">更多</text>
-    <van-icon name="arrow" />
-  </view>
+  <block wx:if="{{hasMore}}">
+    <view class="more" bindtap="handleToMore">
+      <text class="text">更多</text>
+      <van-icon name="arrow" />
+    </view>
+  </block>
 </view>

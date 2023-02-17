@@ -1,1 +1,14 @@
-/* pages/menu-more/menu-more.wxss */
+page {
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+.menu-more .list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.list .iten {
+  width: 48%;
+}
