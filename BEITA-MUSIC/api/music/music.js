@@ -37,3 +37,10 @@ export const getHotMuiscList = (cat = "全部", limit = 6, offset = 0) => {
     offset
   })
 }
+
+/**
+ * 获取热门歌单分类
+ */
+export const getMusicTagList = () => {
+  return beitaRequest.get("/playlist/hot")
+}

@@ -1,5 +1,5 @@
 <view class="menu-area">
-  <area-header title="{{title}}" />
+  <area-header title="{{title}}" bind:toMoreMusic="handleToMore" />
   <scroll-view scroll-x enable-flex class="music-scroll" style="width:{{screenWidth}}px">
     <block wx:for="{{musicList}}" wx:key="id">
       <view class="item">

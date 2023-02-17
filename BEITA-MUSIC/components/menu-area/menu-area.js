@@ -26,7 +26,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // 跳转到更多页面
+    handleToMore() {
+      wx.navigateTo({
+        url: '/pages/menu-more/menu-more',
+      })
+    }
   },
   lifetimes: {
     ready() {
