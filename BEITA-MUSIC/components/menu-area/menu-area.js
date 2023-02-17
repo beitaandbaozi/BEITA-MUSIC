@@ -1,4 +1,4 @@
-// components/area-header/area-header.js
+const app = getApp()
 Component({
   /**
    * 组件的属性列表
@@ -8,9 +8,9 @@ Component({
       type: String,
       value: "默认标题"
     },
-    hasMore: {
-      type: Boolean,
-      value: true
+    musicList: {
+      type: Array,
+      value: []
     }
   },
 
@@ -18,16 +18,21 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    // 设备宽度
+    screenWidth: 375
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    // 点击更多
-    handleToMore() {
-      this.triggerEvent('toMoreMusic')
+
+  },
+  lifetimes: {
+    ready() {
+      this.setData({
+        screenWidth: app.globalData.screenWidth
+      })
     }
   }
 })

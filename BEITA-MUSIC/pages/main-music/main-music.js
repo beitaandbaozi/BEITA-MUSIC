@@ -26,8 +26,10 @@ Page({
     bannerHeight: 150,
     // 推荐歌曲列表
     recommendList: [],
-    // 热门歌曲列表
+    // 热门歌单列表
     hotMusicList: [],
+    // 推荐歌单
+    recommendMusicList: [],
     // 设备宽度
     screenWidth: 375
   },
@@ -55,10 +57,16 @@ Page({
         recommendList: value.tracks.slice(0, 6)
       })
     })
-    // 获取热门歌曲列表
+    // 获取热门歌单列表
     getHotMuiscList().then(res => {
       this.setData({
         hotMusicList: res.playlists
+      })
+    })
+    // 获取推荐歌单列表
+    getHotMuiscList("流行").then(res => {
+      this.setData({
+        recommendMusicList: res.playlists
       })
     })
   },
