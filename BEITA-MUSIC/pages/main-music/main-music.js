@@ -9,6 +9,7 @@ import {
 } from "../../utils/common"
 
 import recommendStore from '../../store/recommend-store'
+import rankingStore from '../../store/ranking-store'
 
 const querySelectThrottle = beitaThrottle(querySelect, 100)
 const app = getApp()
@@ -31,7 +32,9 @@ Page({
     // 推荐歌单
     recommendMusicList: [],
     // 设备宽度
-    screenWidth: 375
+    screenWidth: 375,
+    // 巅峰榜
+    rankingInfo: {}
   },
   onLoad() {
     this.featchData()
@@ -67,6 +70,36 @@ Page({
     getHotMuiscList("流行").then(res => {
       this.setData({
         recommendMusicList: res.playlists
+      })
+    })
+    // 获取巅峰榜数据
+    rankingStore.dispatch("featchRankingData")
+    rankingStore.onState("newRanking", (value) => {
+      // 记得拼接之前的数据
+      const newRankingInfo = {
+        ...this.data.rankingInfo,
+        newRanking: value
+      }
+      this.setData({
+        rankingInfo: newRankingInfo
+      })
+    })
+    rankingStore.onState("origionRanking", (value) => {
+      const origionRankingInfo = {
+        ...this.data.rankingInfo,
+        origionRanking: value
+      }
+      this.setData({
+        rankingInfo: origionRankingInfo
+      })
+    })
+    rankingStore.onState("upRanking", (value) => {
+      const upRankingInfo = {
+        ...this.data.rankingInfo,
+        upRanking: value
+      }
+      this.setData({
+        rankingInfo: upRankingInfo
       })
     })
   },

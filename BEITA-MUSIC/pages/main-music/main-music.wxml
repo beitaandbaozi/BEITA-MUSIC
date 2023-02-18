@@ -19,7 +19,16 @@
     </view>
   </view> -->
   <!-- 热门歌单 -->
-  <menu-area title="热门歌单" musicList="{{hotMusicList}}" />
+  <!-- <menu-area title="热门歌单" musicList="{{hotMusicList}}" /> -->
   <!-- 推荐歌单 -->
-  <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />
+  <!-- <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" /> -->
+  <!-- 巅峰榜 -->
+  <view class="ranking-list">
+    <area-header title="巅峰榜" hasMore="{{false}}" />
+    <block wx:for="{{rankingInfo}}" wx:key="name">
+      <view>
+        {{item.name}}
+      </view>
+    </block>
+  </view>
 </view>
