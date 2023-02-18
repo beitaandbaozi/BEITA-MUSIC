@@ -10,23 +10,32 @@
     </block>
   </swiper>
   <!-- 推荐歌曲 -->
-  <!-- <view class="recommend">
-    <area-header title="推荐歌曲" bind:toMoreMusic="handleToMoreMusic" />
-    <view class="recommend-list">
-      <block wx:for="{{recommendList}}" wx:key="id">
-        <recommend-item itemData="{{item}}" />
+  <block wx:if="{{recommendList.length}}">
+    <view class="recommend">
+      <area-header title="推荐歌曲" bind:toMoreMusic="handleToMoreMusic" />
+      <view class="recommend-list">
+        <block wx:for="{{recommendList}}" wx:key="id">
+          <recommend-item itemData="{{item}}" />
+        </block>
+      </view>
+    </view>
+  </block>
+  <!-- 热门歌单 -->
+  <block wx:if="{{hotMusicList.length}}">
+    <menu-area title="热门歌单" musicList="{{hotMusicList}}" />
+  </block>
+  <block wx:if="{{recommendMusicList.length}}">
+    <!-- 推荐歌单 -->
+    <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />
+  </block>
+
+  <!-- 巅峰榜 -->
+  <block wx:if="{{isRankingInfoFlag}}">
+    <view class="ranking-list">
+      <area-header title="巅峰榜" hasMore="{{false}}" />
+      <block wx:for="{{rankingInfo}}" wx:key="name">
+        <ranking-item itemData="{{item}}" key="{{index}}" />
       </block>
     </view>
-  </view> -->
-  <!-- 热门歌单 -->
-  <menu-area title="热门歌单" musicList="{{hotMusicList}}" />
-  <!-- 推荐歌单 -->
-  <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />
-  <!-- 巅峰榜 -->
-  <!-- <view class="ranking-list">
-    <area-header title="巅峰榜" hasMore="{{false}}" />
-    <block wx:for="{{rankingInfo}}" wx:key="name">
-      <ranking-item itemData="{{item}}" key="{{index}}" />
-    </block>
-  </view> -->
+  </block>
 </view>

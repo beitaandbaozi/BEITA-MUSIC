@@ -34,7 +34,9 @@ Page({
     // 设备宽度
     screenWidth: 375,
     // 巅峰榜
-    rankingInfo: {}
+    rankingInfo: {},
+    // 巅峰榜数据是否展示，性能优化
+    isRankingInfoFlag: false
   },
   onLoad() {
     this.featchData()
@@ -75,31 +77,43 @@ Page({
     // 获取巅峰榜数据
     rankingStore.dispatch("featchRankingData")
     rankingStore.onState("newRanking", (value) => {
+      if (!value.name) return
+      this.setData({
+        isRankingInfoFlag: true
+      })
       // 记得拼接之前的数据
       const newRankingInfo = {
         ...this.data.rankingInfo,
         newRanking: value
       }
       this.setData({
-        rankingInfo: newRankingInfo
+        rankingInfo: newRankingInfo,
       })
     })
     rankingStore.onState("origionRanking", (value) => {
+      if (!value.name) return
+      this.setData({
+        isRankingInfoFlag: true
+      })
       const origionRankingInfo = {
         ...this.data.rankingInfo,
         origionRanking: value
       }
       this.setData({
-        rankingInfo: origionRankingInfo
+        rankingInfo: origionRankingInfo,
       })
     })
     rankingStore.onState("upRanking", (value) => {
+      if (!value.name) return
+      this.setData({
+        isRankingInfoFlag: true
+      })
       const upRankingInfo = {
         ...this.data.rankingInfo,
         upRanking: value
       }
       this.setData({
-        rankingInfo: upRankingInfo
+        rankingInfo: upRankingInfo,
       })
     })
   },
