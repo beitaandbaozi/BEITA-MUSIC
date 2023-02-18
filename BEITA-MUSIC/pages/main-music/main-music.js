@@ -123,7 +123,7 @@ Page({
   // 跳转到更多页面
   handleToMoreMusic() {
     wx.navigateTo({
-      url: '/pages/detail-recommend/detail-recommend',
+      url: '/pages/detail-song/detail-song',
     })
   },
 

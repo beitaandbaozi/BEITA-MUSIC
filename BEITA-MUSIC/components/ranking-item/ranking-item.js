@@ -7,6 +7,10 @@ Component({
     itemData: {
       type: Object,
       value: {}
+    },
+    key: {
+      type: String,
+      value: 'newRanking'
     }
   },
 
@@ -21,6 +25,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // 点击跳转到更多页面
+    handleToMoreMusic() {
+      wx.navigateTo({
+        url: `/pages/detail-song/detail-song?type=ranking&key=${this.properties.key}`,
+      })
+    }
   }
 })

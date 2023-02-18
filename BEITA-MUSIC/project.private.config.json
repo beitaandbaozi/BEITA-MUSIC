@@ -28,6 +28,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "歌曲详情（推荐歌曲、巅峰榜）",
+          "pathName": "pages/detail-song/detail-song",
+          "query": "type=ranking&key=newRanking",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

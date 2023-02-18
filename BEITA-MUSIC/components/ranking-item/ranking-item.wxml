@@ -1,6 +1,6 @@
 <!-- 计算属性 -->
 <wxs src="../../utils/format.wxs" module="format" />
-<view class="ranking-item">
+<view class="ranking-item" bindtap="handleToMoreMusic">
   <view class="info">
     <view class="title">{{itemData.name}}</view>
     <view class="list">
