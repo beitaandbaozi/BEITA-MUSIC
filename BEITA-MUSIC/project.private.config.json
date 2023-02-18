@@ -35,6 +35,13 @@
           "query": "type=ranking&key=newRanking",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "歌单详情页面",
+          "pathName": "pages/detail-song/detail-song",
+          "query": "type=menu&id=639748708",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

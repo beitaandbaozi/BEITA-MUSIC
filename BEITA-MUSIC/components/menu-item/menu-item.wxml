@@ -1,6 +1,6 @@
 <!-- 计算属性 -->
 <wxs src="../../utils/format.wxs" module="format"/>
-<view class="hot-music-item">
+<view class="hot-music-item" bindtap="handleToDetail">
   <view class="top">
     <image class="image" src="{{itemData.coverImgUrl}}" mode="widthFix" />
     <view class="count">
