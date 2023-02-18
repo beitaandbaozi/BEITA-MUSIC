@@ -4,6 +4,7 @@
     "van-search": "@vant/weapp/search/index",
     "area-header": "/components/area-header/area-header",
     "recommend-item": "/components/recommend-item/recommend-item",
-    "menu-area": "/components/menu-area/menu-area"
+    "menu-area": "/components/menu-area/menu-area",
+    "ranking-item": "/components/ranking-item/ranking-item"
   }
 }

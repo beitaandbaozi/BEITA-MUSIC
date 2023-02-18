@@ -1,0 +1,65 @@
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+
+
+  background-color: #eee;
+  border-radius: 12rpx;
+
+  margin-top: 20rpx;
+  /* 图片超过了 直接切割 ===> 显示出圆角 */
+  overflow: hidden;
+}
+
+.info {
+  padding: 24rpx;
+}
+
+.info .title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #000;
+}
+
+.info .list {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+}
+
+.info .list .item {
+  width: 400rpx;
+
+  color: #333;
+  margin-top: 6rpx;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.info .list .item .singer {
+  color: #999;
+}
+
+
+.container {
+  position: relative;
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.container .image {
+  width: 100%;
+  height: 100%;
+}
+
+.container .count {
+  position: absolute;
+  right: 0;
+  bottom: 0rpx;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 12rpx;
+  padding: 6rpx 10rpx;
+  background: rgba(0, 0, 0, .5);
+}

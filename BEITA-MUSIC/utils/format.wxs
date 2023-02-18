@@ -15,6 +15,7 @@ function padLeftZero(str) {
   str = str.toString()
   return ("00" + str).slice(str.length);
 }
+
 function formatMvTime(duration, isMilliseconds) {
   isMilliseconds = isMilliseconds === undefined
   if (isMilliseconds) {
@@ -25,7 +26,22 @@ function formatMvTime(duration, isMilliseconds) {
   return padLeftZero(minute) + ":" + padLeftZero(second)
 }
 
+// 对歌曲歌手格式化
+function formatSinger(array) {
+  var newName = '';
+  if (array.length == 1) {
+    newName = array[array.length - 1].name
+  } else {
+    for (var index = 0; index < array.length; index++) {
+      var element = array[index].name;
+      newName = newName + ' ' + element
+    }
+  }
+  return newName
+}
+
 module.exports = {
   formatCount: formatCount,
-  formatMvTime: formatMvTime
+  formatMvTime: formatMvTime,
+  formatSinger: formatSinger
 }

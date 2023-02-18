@@ -26,9 +26,7 @@
   <view class="ranking-list">
     <area-header title="巅峰榜" hasMore="{{false}}" />
     <block wx:for="{{rankingInfo}}" wx:key="name">
-      <view>
-        {{item.name}}
-      </view>
+      <ranking-item itemData="{{item}}" />
     </block>
   </view>
 </view>
