@@ -28,6 +28,7 @@ function formatMvTime(duration, isMilliseconds) {
 
 // 对歌曲歌手格式化
 function formatSinger(array) {
+  if (!array) return
   var newName = '';
   if (array.length == 1) {
     newName = array[array.length - 1].name
