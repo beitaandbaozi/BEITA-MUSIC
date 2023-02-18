@@ -1,2 +1,6 @@
-<!--pages/detail-recommend/detail-recommend.wxml-->
-<text>pages/detail-recommend/detail-recommend.wxml</text>
+<view class="detail-song">
+  <view class="title">{{musicList.name}}</view>
+  <block wx:for="{{musicList.tracks}}" wx:key="id">
+    <song-item itemData="{{item}}" index="{{index + 1}}" />
+  </block>
+</view>

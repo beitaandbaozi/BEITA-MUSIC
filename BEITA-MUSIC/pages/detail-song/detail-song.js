@@ -23,6 +23,10 @@ Page({
     this.setData({
       musicList: value
     })
+    // 设置导航标题
+    wx.setNavigationBarTitle({
+      title: value.name,
+    })
   },
   onUnload() {
     rankingStore.offState(this.data.key, this.handleStoreCallback)
