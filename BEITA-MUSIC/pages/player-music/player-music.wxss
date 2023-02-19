@@ -11,6 +11,6 @@
 }
 
 .player-music .bg-cover {
-  background: rgba(0, 0, 0, .6);
-  backdrop-filter: blur(7px);
+  background: rgba(0, 0, 0, .4);
+  backdrop-filter: blur(15px);
 }

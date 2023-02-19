@@ -2,6 +2,9 @@ import {
   getSongDetail,
   getSongLyric
 } from '../../api/music/music'
+
+const app = getApp()
+
 Page({
 
   /**
@@ -11,7 +14,9 @@ Page({
     // 歌曲内容
     songDetail: {},
     // 歌词内容
-    songLyric: ''
+    songLyric: '',
+    // 目前设备的状态栏高度
+    statusHeight: 20
   },
 
   /**
@@ -25,6 +30,10 @@ Page({
     this.fetchData(id)
   },
   fetchData(id) {
+    // 自定义导航-撑起的设备栏高度
+    this.setData({
+      statusHeight: app.globalData.statusHeight
+    })
     // 获取歌曲详情信息
     getSongDetail(id).then(res => {
       this.setData({
