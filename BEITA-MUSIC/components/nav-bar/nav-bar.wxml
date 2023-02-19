@@ -1,7 +1,7 @@
 <view class="nav-bar">
   <!-- 由于自定义导航栏之后，顶部的信息栏(信号、wifi)之前样式会取消，所以这里的处理方法是用一个view根据设备来撑起来 -->
   <view style="height:{{statusHeight}}px"></view>
-  <view class="nav">
+  <view class="nav" style="height:{{navBarHeight}}px">
     <view class="left">
       <view class="slot">
         <slot name="left"></slot>

@@ -17,7 +17,10 @@ Component({
    * 组件的初始数据
    */
   data: {
+    // 状态栏高度计算
     statusHeight: 20,
+    // navBar的高度
+    navBarHeight: 44
   },
 
   /**
@@ -29,7 +32,8 @@ Component({
   lifetimes: {
     attached() {
       this.setData({
-        statusHeight: app.globalData.statusHeight
+        statusHeight: app.globalData.statusHeight,
+        navBarHeight: app.globalData.defineNavBarHeight
       })
     }
   }

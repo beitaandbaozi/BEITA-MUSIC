@@ -12,7 +12,7 @@
   </nav-bar>
   <!-- 内容 -->
   <!-- 使用轮播的效果来达到分页 -->
-  <swiper bindchange="handleSwiperChange">
+  <swiper bindchange="handleSwiperChange" style="height:{{swiperHeight}}px">
     <swiper-item>歌词</swiper-item>
     <swiper-item>歌曲</swiper-item>
   </swiper>
