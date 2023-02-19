@@ -44,3 +44,22 @@ export const getHotMuiscList = (cat = "全部", limit = 6, offset = 0) => {
 export const getMusicTagList = () => {
   return beitaRequest.get("/playlist/hot")
 }
+
+/***
+ * 获取歌曲详情
+ * 必选参数 :** `ids`: 音乐 id, 如 `ids=347230`
+ */
+export const getSongDetail = (ids) => {
+  return beitaRequest.get("/song/detail", {
+    ids
+  })
+}
+/***
+ * 获取歌词信息
+ * 必选参数 :** `id`: 音乐 id
+ */
+export const getSongLyric = (id) => {
+  return beitaRequest.get("/lyric", {
+    id
+  })
+}

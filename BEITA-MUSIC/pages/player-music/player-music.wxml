@@ -1,0 +1,5 @@
+<view class="player-music">
+  <!-- 背景 -->
+  <image src="{{songDetail.al.picUrl}}" mode="aspectFill" class="bg-image"/>
+  <view class="bg-cover"></view>
+</view>

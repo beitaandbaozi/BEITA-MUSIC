@@ -21,6 +21,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // 点击跳转到播放器
+    handleToPlayerMusic() {
+      wx.navigateTo({
+        url: `/pages/player-music/player-music?id=${this.properties.itemData.id}`,
+      })
+    }
   }
 })

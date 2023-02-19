@@ -1,6 +1,6 @@
 <!-- 计算属性 -->
 <wxs src="../../utils/format.wxs" module="format" />
-<view class="song-item">
+<view class="song-item" bindtap="handleToPlayerMusic">
   <view class="index">{{index}}</view>
   <view class="info">
     <view>{{itemData.name}}</view>
