@@ -46,7 +46,7 @@
         {
           "name": "歌曲详情（播放器）",
           "pathName": "pages/player-music/player-music",
-          "query": "id=1410647903",
+          "query": "id=1403318151",
           "launchMode": "default",
           "scene": null
         }

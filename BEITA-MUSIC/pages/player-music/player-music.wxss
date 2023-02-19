@@ -1,5 +1,3 @@
-.player-music {}
-
 .player-music .bg-image,
 .player-music .bg-cover {
   position: fixed;
@@ -13,4 +11,18 @@
 .player-music .bg-cover {
   background: rgba(0, 0, 0, .4);
   backdrop-filter: blur(15px);
+}
+
+.tab {
+  display: flex;
+  font-size: 24rpx;
+  color: #aaa;
+}
+
+.tab .divider {
+  margin: 0 8rpx;
+}
+
+.tab .active {
+  color: #fff
 }

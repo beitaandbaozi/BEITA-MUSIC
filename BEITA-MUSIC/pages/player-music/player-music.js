@@ -14,6 +14,8 @@ Page({
     songDetail: {},
     // 歌词内容
     songLyric: '',
+    // 当前的页面，用于切换导航栏
+    currentPage: 0
   },
 
   /**
@@ -39,6 +41,11 @@ Page({
         songLyric: res.lrc.lyric
       })
     })
+  },
+  // 轮播切换响应
+  handleSwiperChange(event) {
+    this.setData({
+      currentPage: event.detail.current
+    })
   }
-
 })
