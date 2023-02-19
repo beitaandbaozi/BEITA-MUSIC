@@ -17,7 +17,9 @@ Page({
     // 当前的页面，用于切换导航栏
     currentPage: 0,
     // 轮播图高度---> 由于导航的自定义，需要动态计算
-    swiperHeight: 500
+    swiperHeight: 500,
+    // 导航栏标题
+    pageNavTitle: ['歌曲', '歌词']
   },
 
   /**
@@ -52,6 +54,13 @@ Page({
   handleSwiperChange(event) {
     this.setData({
       currentPage: event.detail.current
+    })
+  },
+  // 点击标题，切换轮播图页面
+  onNavTabItemTap(event) {
+    const id = event.currentTarget.dataset.index
+    this.setData({
+      currentPage: id
     })
   }
 })
