@@ -27,7 +27,9 @@ Page({
     // 当前歌曲播放到的时间
     currentTime: 0,
     // 歌曲总时间
-    durationTime: 0
+    durationTime: 0,
+    // 进度条   ===> （当前播放的时间/总时间） * 100
+    sliderValue: 0
   },
 
   /**
@@ -62,9 +64,14 @@ Page({
 
     // 监听歌曲播放进度
     audioContext.onTimeUpdate(() => {
-      // 记录当前时间
+      // 1.记录当前时间
       this.setData({
         currentTime: audioContext.currentTime * 1000
+      })
+      // 2.记录当前播放进度条
+      const sliderValue = this.data.currentTime / this.data.durationTime * 100
+      this.setData({
+        sliderValue: sliderValue
       })
     })
   },
