@@ -4,6 +4,8 @@ import {
 } from '../../api/music/music'
 
 const app = getApp()
+// 创建播放器
+const audioContext = wx.createInnerAudioContext()
 Page({
 
   /**
@@ -49,6 +51,9 @@ Page({
         songLyric: res.lrc.lyric
       })
     })
+    // 播放歌曲
+    audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+    audioContext.play()
   },
   // 轮播切换响应
   handleSwiperChange(event) {
@@ -62,5 +67,9 @@ Page({
     this.setData({
       currentPage: id
     })
+  },
+  onUnload() {
+    // 停止播放
+    audioContext.stop()
   }
 })
