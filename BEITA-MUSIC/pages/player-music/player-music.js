@@ -23,7 +23,11 @@ Page({
     // 导航栏标题
     pageNavTitle: ['歌曲', '歌词'],
     // 歌曲是否暂停
-    isPause: false
+    isPause: false,
+    // 当前歌曲播放到的时间
+    currentTime: 0,
+    // 歌曲总时间
+    durationTime: 0
   },
 
   /**
@@ -34,9 +38,6 @@ Page({
     const {
       id
     } = options
-    this.fetchData(id)
-  },
-  fetchData(id) {
     // 更改轮播图高度
     this.setData({
       swiperHeight: app.globalData.contentHeight
@@ -44,7 +45,8 @@ Page({
     // 获取歌曲详情信息
     getSongDetail(id).then(res => {
       this.setData({
-        songDetail: res.songs[0]
+        songDetail: res.songs[0],
+        durationTime: res.songs[0].dt
       })
     })
     // 获取歌词信息
@@ -53,9 +55,18 @@ Page({
         songLyric: res.lrc.lyric
       })
     })
+
     // 播放歌曲
     audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
-    audioContext.play()
+    audioContext.autoplay = true
+
+    // 监听歌曲播放进度
+    audioContext.onTimeUpdate(() => {
+      // 记录当前时间
+      this.setData({
+        currentTime: audioContext.currentTime * 1000
+      })
+    })
   },
   // 轮播切换响应
   handleSwiperChange(event) {
@@ -83,7 +94,6 @@ Page({
         isPause: false
       })
     }
-
   },
   onUnload() {
     // 停止播放

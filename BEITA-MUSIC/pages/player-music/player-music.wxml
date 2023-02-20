@@ -37,8 +37,8 @@
       <view class="progress">
         <slider block-size="12" class="slider" />
         <view class="time">
-          <view class="current">00:00</view>
-          <view class="duration">02:20</view>
+          <view class="current">{{format.formatMvTime(currentTime)}}</view>
+          <view class="duration">{{format.formatMvTime(durationTime)}}</view>
         </view>
       </view>
       <!-- 歌曲控制 -->
