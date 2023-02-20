@@ -46,7 +46,7 @@
         <view class="operation">
           <image class="btn btn-mode" src="/assets/images/player/play_order.png" />
           <image class="btn btn-prev" src="/assets/images/player/play_prev.png" />
-          <image class="btn btn-play" src="/assets/images/player/play_pause.png" />
+          <image class="btn btn-play" src="/assets/images/player/play_{{isPause ? 'resume':'pause'}}.png" bindtap="toggleMusicStatus" />
           <image class="btn btn-next" src="/assets/images/player/play_next.png" />
           <image class="btn btn-music" src="/assets/images/player/play_music.png" />
         </view>

@@ -21,7 +21,9 @@ Page({
     // 轮播图高度---> 由于导航的自定义，需要动态计算
     swiperHeight: 500,
     // 导航栏标题
-    pageNavTitle: ['歌曲', '歌词']
+    pageNavTitle: ['歌曲', '歌词'],
+    // 歌曲是否暂停
+    isPause: false
   },
 
   /**
@@ -67,6 +69,21 @@ Page({
     this.setData({
       currentPage: id
     })
+  },
+  // 暂停和播放音乐
+  toggleMusicStatus() {
+    if (!this.data.isPause) {
+      audioContext.pause()
+      this.setData({
+        isPause: true
+      })
+    } else {
+      audioContext.play()
+      this.setData({
+        isPause: false
+      })
+    }
+
   },
   onUnload() {
     // 停止播放
