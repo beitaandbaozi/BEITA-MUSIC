@@ -1,3 +1,5 @@
+<!-- 计算属性 -->
+<wxs src="../../utils/format.wxs" module="format" />
 <view class="player-music">
   <!-- 背景 -->
   <image src="{{songDetail.al.picUrl}}" mode="aspectFill" class="bg-image" />
@@ -17,7 +19,39 @@
   <!-- 内容 -->
   <!-- 使用轮播的效果来达到分页 -->
   <swiper bindchange="handleSwiperChange" style="height:{{swiperHeight}}px" current="{{currentPage}}">
-    <swiper-item>歌词</swiper-item>
+    <swiper-item class="music">
+      <!-- 歌曲照片 -->
+      <view class="album">
+        <image src="{{songDetail.al.picUrl}}" class="image" mode="widthFix" />
+      </view>
+      <!-- 歌曲信息 -->
+      <view class="info">
+        <view class="name">{{songDetail.name}}</view>
+        <view class="singer">{{format.formatSinger(songDetail.ar)}}</view>
+      </view>
+      <!-- 一句歌词 -->
+      <view class="lyric">
+        一句歌词
+      </view>
+      <!-- 歌曲进度时长 -->
+      <view class="progress">
+        <slider block-size="12" class="slider" />
+        <view class="time">
+          <view class="current">00:00</view>
+          <view class="duration">02:20</view>
+        </view>
+      </view>
+      <!-- 歌曲控制 -->
+      <view class="control">
+        <view class="operation">
+          <image class="btn btn-mode" src="/assets/images/player/play_order.png" />
+          <image class="btn btn-prev" src="/assets/images/player/play_prev.png" />
+          <image class="btn btn-play" src="/assets/images/player/play_pause.png" />
+          <image class="btn btn-next" src="/assets/images/player/play_next.png" />
+          <image class="btn btn-music" src="/assets/images/player/play_music.png" />
+        </view>
+      </view>
+    </swiper-item>
     <swiper-item>歌曲</swiper-item>
   </swiper>
 </view>
