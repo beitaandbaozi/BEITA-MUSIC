@@ -74,6 +74,12 @@ Page({
         sliderValue: sliderValue
       })
     })
+    audioContext.onWaiting(() => {
+      audioContext.pause()
+    })
+    audioContext.onCanplay(() => {
+      audioContext.play()
+    })
   },
   // 轮播切换响应
   handleSwiperChange(event) {
@@ -102,6 +108,18 @@ Page({
       })
     }
   },
+  // 点进进度条调整音乐播放时间
+  handleSliderChange(event) {
+    const value = event.detail.value;
+    // 计算当前的时间
+    const currentTime = value / 100 * this.data.durationTime
+    // 更新时间
+    audioContext.seek(currentTime / 1000)
+    this.setData({
+      currentTime
+    })
+  },
+
   onUnload() {
     // 停止播放
     audioContext.stop()
