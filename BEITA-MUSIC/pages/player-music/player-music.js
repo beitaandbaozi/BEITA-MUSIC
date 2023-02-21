@@ -2,6 +2,7 @@ import {
   getSongDetail,
   getSongLyric
 } from '../../api/music/music'
+import { beitaThrottle } from '../../utils/common'
 
 const app = getApp()
 // 创建播放器
@@ -65,17 +66,10 @@ Page({
     audioContext.autoplay = true
 
     // 监听歌曲播放进度
+    const throttle = beitaThrottle(this.updateProgress, 1000)
     audioContext.onTimeUpdate(() => {
       if (!this.data.isSliderChanging) {
-        // 1.记录当前时间
-        this.setData({
-          currentTime: audioContext.currentTime * 1000
-        })
-        // 2.记录当前播放进度条
-        const sliderValue = this.data.currentTime / this.data.durationTime * 100
-        this.setData({
-          sliderValue: sliderValue
-        })
+        throttle()
       }
     })
     audioContext.onWaiting(() => {
@@ -83,6 +77,18 @@ Page({
     })
     audioContext.onCanplay(() => {
       audioContext.play()
+    })
+  },
+  // 歌曲播放响应
+  updateProgress() {
+    // 1.记录当前时间
+    this.setData({
+      currentTime: audioContext.currentTime * 1000
+    })
+    // 2.记录当前播放进度条
+    const sliderValue = this.data.currentTime / this.data.durationTime * 100
+    this.setData({
+      sliderValue: sliderValue
     })
   },
   // 轮播切换响应
