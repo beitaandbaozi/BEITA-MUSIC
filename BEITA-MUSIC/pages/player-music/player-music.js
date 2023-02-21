@@ -29,7 +29,9 @@ Page({
     // 歌曲总时间
     durationTime: 0,
     // 进度条   ===> （当前播放的时间/总时间） * 100
-    sliderValue: 0
+    sliderValue: 0,
+    // 是否进行滑动操作
+    isSliderChanging: false
   },
 
   /**
@@ -64,15 +66,17 @@ Page({
 
     // 监听歌曲播放进度
     audioContext.onTimeUpdate(() => {
-      // 1.记录当前时间
-      this.setData({
-        currentTime: audioContext.currentTime * 1000
-      })
-      // 2.记录当前播放进度条
-      const sliderValue = this.data.currentTime / this.data.durationTime * 100
-      this.setData({
-        sliderValue: sliderValue
-      })
+      if (!this.data.isSliderChanging) {
+        // 1.记录当前时间
+        this.setData({
+          currentTime: audioContext.currentTime * 1000
+        })
+        // 2.记录当前播放进度条
+        const sliderValue = this.data.currentTime / this.data.durationTime * 100
+        this.setData({
+          sliderValue: sliderValue
+        })
+      }
     })
     audioContext.onWaiting(() => {
       audioContext.pause()
@@ -117,6 +121,17 @@ Page({
     audioContext.seek(currentTime / 1000)
     this.setData({
       currentTime
+    })
+  },
+  // 拖动进度条调整音乐播放时间
+  handleSliderChanging(event) {
+    const value = event.detail.value
+    // 滑动此时不需要更改播放进度，而是松手之后才更改，所以不使用 audioContext.seek()
+    // 由于 onTimeUpdate 一直都在运行 所以设置一个变量来控制一下
+    const currentTime = value / 100 * this.data.durationTime
+    this.setData({
+      currentTime,
+      isSliderChanging: true
     })
   },
 
