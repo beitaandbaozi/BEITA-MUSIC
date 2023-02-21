@@ -2,7 +2,10 @@ import {
   getSongDetail,
   getSongLyric
 } from '../../api/music/music'
-import { beitaThrottle } from '../../utils/common'
+import {
+  beitaThrottle,
+  parseLyric
+} from '../../utils/common'
 
 const app = getApp()
 // 创建播放器
@@ -16,7 +19,7 @@ Page({
     // 歌曲内容
     songDetail: {},
     // 歌词内容
-    songLyric: '',
+    songLyric: [],
     // 当前的页面，用于切换导航栏
     currentPage: 0,
     // 轮播图高度---> 由于导航的自定义，需要动态计算
@@ -56,9 +59,11 @@ Page({
     })
     // 获取歌词信息
     getSongLyric(id).then(res => {
-      this.setData({
-        songLyric: res.lrc.lyric
-      })
+      const lrc = parseLyric(res.lrc.lyric)
+      console.log('===', lrc)
+      // this.setData({
+      //   songLyric: parseLyric(res.lrc.lyric)
+      // })
     })
 
     // 播放歌曲

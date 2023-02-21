@@ -64,3 +64,31 @@ export const beitaThrottle = (fn, interval = 200, {
   }
   return _throttle
 }
+
+/**
+ * 解析歌词  [{time:xxxxx,text:xxxxx},......]
+ */
+// 解析时间正则表达式
+const timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/
+export const parseLyric = (lyricString) => {
+  const lyricStrings = lyricString.split("\n")
+  const lyricInfos = []
+  for (const lineString of lyricStrings) {
+    const timeResult = timeReg.exec(lineString)
+    if (!timeResult) continue
+    // 1.获取时间
+    const minute = timeResult[1] * 60 * 1000
+    const second = timeResult[2] * 1000
+    const millsecondTime = timeResult[3]
+    const millsecond = millsecondTime.length === 2 ? millsecondTime * 10 : millsecondTime * 1
+    const time = minute + second + millsecond
+    // 2.获取歌词文
+    const text = lineString.replace(timeReg, "")
+    lyricInfos.push({
+      time,
+      text
+    })
+  }
+
+  return lyricInfos
+}
