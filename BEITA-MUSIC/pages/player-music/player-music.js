@@ -101,6 +101,7 @@ Page({
       audioContext.pause()
     })
     audioContext.onCanplay(() => {
+      // 暂停时，调整进度时===> 不播放歌曲
       if(this.data.isPause) return;
       audioContext.play()
     })
