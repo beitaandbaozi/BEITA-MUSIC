@@ -37,7 +37,9 @@ Page({
     // 是否进行滑动操作
     isSliderChanging: false,
     // 当前歌曲载入的歌词
-    currentLyric: ''
+    currentLyric: '',
+    // 当前歌曲歌词的索引,用来做优化
+    currentLyricIndex: -1
   },
 
   /**
@@ -88,8 +90,11 @@ Page({
           break
         }
       }
+      // 防止同一时段同一时间更新同一句歌词
+      if(index === this.data.currentLyricIndex) return;
       this.setData({
-        currentLyric: this.data.songLyric[index].text
+        currentLyric: this.data.songLyric[index].text,
+        currentLyricIndex: index
       })
     })
     audioContext.onWaiting(() => {
