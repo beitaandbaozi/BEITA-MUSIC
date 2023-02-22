@@ -101,6 +101,7 @@ Page({
       audioContext.pause()
     })
     audioContext.onCanplay(() => {
+      if(this.data.isPause) return;
       audioContext.play()
     })
   },
