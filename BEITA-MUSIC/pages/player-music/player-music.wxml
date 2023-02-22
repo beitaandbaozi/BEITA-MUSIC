@@ -31,11 +31,11 @@
       </view>
       <!-- 一句歌词 -->
       <view class="lyric">
-        一句歌词
+        {{currentLyric}}
       </view>
       <!-- 歌曲进度时长 -->
       <view class="progress">
-        <slider block-size="12" class="slider" value="{{sliderValue}}" bindchange="handleSliderChange" bindchanging="handleSliderChanging"/>
+        <slider block-size="12" class="slider" value="{{sliderValue}}" bindchange="handleSliderChange" bindchanging="handleSliderChanging" />
         <view class="time">
           <view class="current">{{format.formatMvTime(currentTime)}}</view>
           <view class="duration">{{format.formatMvTime(durationTime)}}</view>

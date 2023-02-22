@@ -35,7 +35,9 @@ Page({
     // 进度条   ===> （当前播放的时间/总时间） * 100
     sliderValue: 0,
     // 是否进行滑动操作
-    isSliderChanging: false
+    isSliderChanging: false,
+    // 当前歌曲载入的歌词
+    currentLyric: ''
   },
 
   /**
@@ -60,10 +62,9 @@ Page({
     // 获取歌词信息
     getSongLyric(id).then(res => {
       const lrc = parseLyric(res.lrc.lyric)
-      console.log('===', lrc)
-      // this.setData({
-      //   songLyric: parseLyric(res.lrc.lyric)
-      // })
+      this.setData({
+        songLyric: lrc
+      })
     })
 
     // 播放歌曲
@@ -76,6 +77,20 @@ Page({
       if (!this.data.isSliderChanging) {
         throttle()
       }
+      // 1.动态计算当前显示的歌词
+      if (!this.data.songLyric.length) return
+      let index = this.data.songLyric.length - 1;
+      for (let i = 0; i < this.data.songLyric.length; i++) {
+        const info = this.data.songLyric[i]
+        if (info.time > audioContext.currentTime * 1000) {
+          // 说明是在前一句歌词，还没到这一句
+          index = i - 1
+          break
+        }
+      }
+      this.setData({
+        currentLyric: this.data.songLyric[index].text
+      })
     })
     audioContext.onWaiting(() => {
       audioContext.pause()
