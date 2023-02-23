@@ -52,6 +52,13 @@
         </view>
       </view>
     </swiper-item>
-    <swiper-item>歌曲</swiper-item>
+    <!-- 歌曲 -->
+    <swiper-item>
+      <scroll-view scroll-y class="scroll-container">
+        <block wx:for="{{songLyric}}" wx:key="time">
+          <view class="item">{{item.text}}</view>
+        </block>
+      </scroll-view>
+    </swiper-item>
   </swiper>
 </view>

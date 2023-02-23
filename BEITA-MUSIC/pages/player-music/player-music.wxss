@@ -100,3 +100,14 @@
   width: 120rpx;
   height: 120rpx;
 }
+/* 歌曲 */
+.scroll-container {
+  font-size: 28rpx;
+  height: 100%;
+  text-align: center;
+  color: #aaa;
+}
+.scroll-container .item {
+  height: 35px;
+  line-height: 35px;
+}
