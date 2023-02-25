@@ -135,6 +135,10 @@ Page({
         if (this.data.isPause) return;
         audioContext.play()
       })
+      audioContext.onEnded(() => {
+        // 播放结束的响应事件
+        this.changeNextSong()
+      })
     }
   },
   // 歌曲播放响应
