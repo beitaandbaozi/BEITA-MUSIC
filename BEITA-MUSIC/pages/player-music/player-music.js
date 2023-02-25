@@ -47,7 +47,11 @@ Page({
     // 播放列表
     playSongList: [],
     // 当前歌曲在播放列表中的索引
-    playSongIndex: -1
+    playSongIndex: -1,
+    // 当前播放歌曲的id
+    playSongId: 0,
+    // 只在第一次渲染时监听audioContext
+    isFirstPlay: true
   },
 
   /**
@@ -58,9 +62,22 @@ Page({
     const {
       id
     } = options
-    // 更改轮播图高度
+    // 0.更改轮播图高度(获取设备信息)
     this.setData({
       swiperHeight: app.globalData.contentHeight
+    })
+    // 1.播放歌曲
+    this.setupPlaySong(id)
+
+
+    // 获取存放在仓库中的歌曲列表
+    playSongListStore.onStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
+  },
+  // ============================== 播放歌曲==============================
+  setupPlaySong(id) {
+    // 设置当前播放歌曲ID
+    this.setData({
+      playSongId: id
     })
     // 获取歌曲详情信息
     getSongDetail(id).then(res => {
@@ -82,43 +99,43 @@ Page({
     audioContext.autoplay = true
 
     // 监听歌曲播放进度
-    const throttle = beitaThrottle(this.updateProgress, 1000)
-    audioContext.onTimeUpdate(() => {
-      if (!this.data.isSliderChanging) {
-        throttle()
-      }
-      // 1.动态计算当前显示的歌词
-      if (!this.data.songLyric.length) return
-      let index = this.data.songLyric.length - 1;
-      for (let i = 0; i < this.data.songLyric.length; i++) {
-        const info = this.data.songLyric[i]
-        if (info.time > audioContext.currentTime * 1000) {
-          // 说明是在前一句歌词，还没到这一句
-          index = i - 1
-          break
+    if (this.data.isFirstPlay) {
+      this.data.isFirstPlay = false
+      const throttle = beitaThrottle(this.updateProgress, 1000)
+      audioContext.onTimeUpdate(() => {
+        if (!this.data.isSliderChanging) {
+          throttle()
         }
-      }
-      // 防止同一时段同一时间更新同一句歌词
-      if (index === this.data.currentLyricIndex) return;
-      // 更新歌词
-      // 更新歌词需要滚动位置   ===> 其中 35 是为每一句歌词设置的高度
-      this.setData({
-        currentLyric: this.data.songLyric[index].text,
-        currentLyricIndex: index,
-        lyricScrollTop: 35 * index
+        // 1.动态计算当前显示的歌词
+        if (!this.data.songLyric.length) return
+        let index = this.data.songLyric.length - 1;
+        for (let i = 0; i < this.data.songLyric.length; i++) {
+          const info = this.data.songLyric[i]
+          if (info.time > audioContext.currentTime * 1000) {
+            // 说明是在前一句歌词，还没到这一句
+            index = i - 1
+            break
+          }
+        }
+        // 防止同一时段同一时间更新同一句歌词
+        if (index === this.data.currentLyricIndex) return;
+        // 更新歌词
+        // 更新歌词需要滚动位置   ===> 其中 35 是为每一句歌词设置的高度
+        this.setData({
+          currentLyric: this.data.songLyric[index].text,
+          currentLyricIndex: index,
+          lyricScrollTop: 35 * index
+        })
       })
-    })
-    audioContext.onWaiting(() => {
-      audioContext.pause()
-    })
-    audioContext.onCanplay(() => {
-      // 暂停时，调整进度时===> 不播放歌曲
-      if (this.data.isPause) return;
-      audioContext.play()
-    })
-
-    // 获取存放在仓库中的歌曲列表
-    playSongListStore.onStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
+      audioContext.onWaiting(() => {
+        audioContext.pause()
+      })
+      audioContext.onCanplay(() => {
+        // 暂停时，调整进度时===> 不播放歌曲
+        if (this.data.isPause) return;
+        audioContext.play()
+      })
+    }
   },
   // 歌曲播放响应
   updateProgress() {
@@ -201,8 +218,18 @@ Page({
     if (index === -1) index = length - 1
     // 4.获取当前索引值在播放列表中的数据
     const newSong = this.data.playSongList[index]
-    console.log('newSong', newSong)
-    // 5.在store记录最新的索引
+    // 5.播放歌曲
+    // 5.1 先把当前的数据清空
+    this.setData({
+      songDetail: {},
+      currentTime: 0,
+      durationTime: 0,
+      sliderValue: 0,
+      songLyric: []
+    })
+    // 5.2 业务操作
+    this.setupPlaySong(newSong.id)
+    // 6.在store记录最新的索引
     playSongListStore.setState('songIndex', index)
   },
   // 获取仓库中的歌曲列表以及对应的索引
