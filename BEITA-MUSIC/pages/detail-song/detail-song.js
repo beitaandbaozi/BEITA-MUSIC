@@ -1,5 +1,7 @@
 import rankingStore from '../../store/ranking-store'
 import recommendStore from '../../store/recommend-store'
+import playSongListStore from '../../store/paly-song-store'
+
 import {
   getRecommendList
 } from '../../api/music/music'
@@ -57,6 +59,10 @@ Page({
     wx.setNavigationBarTitle({
       title: value.name,
     })
+  },
+  // 获取仓库中的歌曲列表
+  handleToGetSongList() {
+    playSongListStore.setState('songList', this.data.musicList.tracks)
   },
   onUnload() {
     if (this.data.type === 'ranking') {

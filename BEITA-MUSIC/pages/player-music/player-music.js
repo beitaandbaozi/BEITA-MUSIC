@@ -7,6 +7,8 @@ import {
   parseLyric
 } from '../../utils/common'
 
+import playSongListStore from '../../store/paly-song-store'
+
 const app = getApp()
 // 创建播放器
 const audioContext = wx.createInnerAudioContext()
@@ -110,6 +112,9 @@ Page({
       if(this.data.isPause) return;
       audioContext.play()
     })
+
+    // 获取存放在仓库中的歌曲列表
+    playSongListStore.onState('songList', this.handleGetPlaySongList)
   },
   // 歌曲播放响应
   updateProgress() {
@@ -173,8 +178,15 @@ Page({
     })
   },
 
+  // 获取仓库中的歌曲列表
+  handleGetPlaySongList(value) {
+    console.log('===', value)
+  },
+
   onUnload() {
     // 停止播放
     audioContext.stop()
+    // 释放仓库中的数据
+    playSongListStore.offState('songList', this.handleGetPlaySongList)
   }
 })

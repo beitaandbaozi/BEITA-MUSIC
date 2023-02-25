@@ -10,6 +10,7 @@ import {
 
 import recommendStore from '../../store/recommend-store'
 import rankingStore from '../../store/ranking-store'
+import playSongListStore from '../../store/paly-song-store'
 
 const querySelectThrottle = beitaThrottle(querySelect, 100)
 const app = getApp()
@@ -139,6 +140,12 @@ Page({
     wx.navigateTo({
       url: '/pages/detail-song/detail-song?type=recommend',
     })
+  },
+
+  // 点击推荐歌曲中的歌曲，获取目前推荐歌曲里的歌曲列表 ===> 播放器那边需要作 上一首、下一首等处理
+  handleToGetPlaySongList() {
+    // 将目前推荐歌曲里的歌曲放到仓库(store)中去
+    playSongListStore.setState('songList', this.data.recommendList)
   },
 
   onUnload() {
