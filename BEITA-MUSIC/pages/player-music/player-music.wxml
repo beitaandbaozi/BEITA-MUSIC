@@ -5,7 +5,7 @@
   <image src="{{songDetail.al.picUrl}}" mode="aspectFill" class="bg-image" />
   <view class="bg-cover"></view>
   <!-- 自定义导航栏 -->
-  <nav-bar>
+  <nav-bar bind:leftclick="handleNavBack">
     <view class="tab" slot="center">
       <block wx:for="{{pageNavTitle}}" wx:key="*this">
         <view class="{{currentPage === index ? 'active': ''}}" bindtap="onNavTabItemTap" data-index="{{index}}">{{item}}</view>

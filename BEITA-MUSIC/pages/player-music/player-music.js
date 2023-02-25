@@ -289,11 +289,14 @@ Page({
       })
     }
   },
-
+  // 导航返回
+  handleNavBack(){
+    wx.navigateBack()
+  },
   onUnload() {
     // 停止播放
     audioContext.stop()
     // 释放仓库中的数据
-    playSongListStore.offStates(['songList', 'songIndex'], this.handleGetPlaySongList)
+    playSongListStore.offStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
   }
 })
