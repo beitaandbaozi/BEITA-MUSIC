@@ -43,7 +43,11 @@ Page({
     // 当前歌曲歌词的索引,用来做优化
     currentLyricIndex: -1,
     // 当前歌词需要滚动的位置 ===> 配合scroll-view中的 scroll-top使用
-    lyricScrollTop: 0
+    lyricScrollTop: 0,
+    // 播放列表
+    playSongList:[],
+    // 当前歌曲在播放列表中的索引
+    playSongIndex: -1
   },
 
   /**
@@ -114,7 +118,7 @@ Page({
     })
 
     // 获取存放在仓库中的歌曲列表
-    playSongListStore.onState('songList', this.handleGetPlaySongList)
+    playSongListStore.onStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
   },
   // 歌曲播放响应
   updateProgress() {
@@ -178,15 +182,20 @@ Page({
     })
   },
 
-  // 获取仓库中的歌曲列表
-  handleGetPlaySongList(value) {
-    console.log('===', value)
+  // 获取仓库中的歌曲列表以及对应的索引
+  handleGetPlaySongInfos({songList, songIndex}) {
+    if(songList) {
+      this.setData({playSongList:songList})
+    }
+    if(songIndex !== undefined) {
+      this.setData({playSongIndex: songIndex})
+    }
   },
 
   onUnload() {
     // 停止播放
     audioContext.stop()
     // 释放仓库中的数据
-    playSongListStore.offState('songList', this.handleGetPlaySongList)
+    playSongListStore.offStates(['songList', 'songIndex'], this.handleGetPlaySongList)
   }
 })

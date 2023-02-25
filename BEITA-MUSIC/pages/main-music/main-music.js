@@ -143,9 +143,11 @@ Page({
   },
 
   // 点击推荐歌曲中的歌曲，获取目前推荐歌曲里的歌曲列表 ===> 播放器那边需要作 上一首、下一首等处理
-  handleToGetPlaySongList() {
+  handleToGetPlaySongList(event) {
+    const index = event.currentTarget.dataset.index
     // 将目前推荐歌曲里的歌曲放到仓库(store)中去
     playSongListStore.setState('songList', this.data.recommendList)
+    playSongListStore.setState('songIndex', index)
   },
 
   onUnload() {

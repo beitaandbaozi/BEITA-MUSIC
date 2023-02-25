@@ -61,8 +61,10 @@ Page({
     })
   },
   // 获取仓库中的歌曲列表
-  handleToGetSongList() {
+  handleToGetSongList(event) {
+    const index = event.currentTarget.dataset.index
     playSongListStore.setState('songList', this.data.musicList.tracks)
+    playSongListStore.setState('songIndex', index)
   },
   onUnload() {
     if (this.data.type === 'ranking') {
