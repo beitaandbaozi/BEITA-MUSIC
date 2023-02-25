@@ -107,6 +107,9 @@
   height: 100%;
   text-align: center;
   color: #aaa;
+  /* 歌词不直接从底部滚动 */
+  padding: 40rpx;
+  box-sizing: border-box;
 }
 
 /* 隐藏滚动条 */
@@ -117,4 +120,9 @@
 .scroll-container .item {
   height: 35px;
   line-height: 35px;
+}
+
+.scroll-container .item.active {
+  font-size: 36rpx;
+  color: lightpink;
 }

@@ -54,9 +54,13 @@
     </swiper-item>
     <!-- 歌曲 -->
     <swiper-item>
-      <scroll-view scroll-y class="scroll-container">
+      <scroll-view 
+      scroll-y 
+      class="scroll-container"
+      scroll-top="{{lyricScrollTop}}"
+      scroll-with-animation>
         <block wx:for="{{songLyric}}" wx:key="time">
-          <view class="item">{{item.text}}</view>
+          <view class="item {{ index === currentLyricIndex ? 'active' : '' }}" style="padding-top:{{index === 0 ? (swiperHeight/2) : 0}}px; padding-bottom:{{index === songLyric.length - 1 ? (swiperHeight/2) : 0 }}px">{{item.text}}</view>
         </block>
       </scroll-view>
     </swiper-item>

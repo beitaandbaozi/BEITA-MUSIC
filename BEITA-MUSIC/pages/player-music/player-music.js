@@ -39,7 +39,9 @@ Page({
     // 当前歌曲载入的歌词
     currentLyric: '',
     // 当前歌曲歌词的索引,用来做优化
-    currentLyricIndex: -1
+    currentLyricIndex: -1,
+    // 当前歌词需要滚动的位置 ===> 配合scroll-view中的 scroll-top使用
+    lyricScrollTop: 0
   },
 
   /**
@@ -92,9 +94,12 @@ Page({
       }
       // 防止同一时段同一时间更新同一句歌词
       if(index === this.data.currentLyricIndex) return;
+      // 更新歌词
+      // 更新歌词需要滚动位置   ===> 其中 35 是为每一句歌词设置的高度
       this.setData({
         currentLyric: this.data.songLyric[index].text,
-        currentLyricIndex: index
+        currentLyricIndex: index,
+        lyricScrollTop: 35 * index
       })
     })
     audioContext.onWaiting(() => {
