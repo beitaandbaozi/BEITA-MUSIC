@@ -45,7 +45,7 @@ Page({
     // 当前歌词需要滚动的位置 ===> 配合scroll-view中的 scroll-top使用
     lyricScrollTop: 0,
     // 播放列表
-    playSongList:[],
+    playSongList: [],
     // 当前歌曲在播放列表中的索引
     playSongIndex: -1
   },
@@ -99,7 +99,7 @@ Page({
         }
       }
       // 防止同一时段同一时间更新同一句歌词
-      if(index === this.data.currentLyricIndex) return;
+      if (index === this.data.currentLyricIndex) return;
       // 更新歌词
       // 更新歌词需要滚动位置   ===> 其中 35 是为每一句歌词设置的高度
       this.setData({
@@ -113,7 +113,7 @@ Page({
     })
     audioContext.onCanplay(() => {
       // 暂停时，调整进度时===> 不播放歌曲
-      if(this.data.isPause) return;
+      if (this.data.isPause) return;
       audioContext.play()
     })
 
@@ -181,14 +181,44 @@ Page({
       isSliderChanging: true
     })
   },
-
+  // 切换上一首歌曲
+  handlePrevBtnMusic() {
+    this.changeNextSong(false)
+  },
+  // 切换下一首
+  handleNextBtnMusic() {
+    this.changeNextSong()
+  },
+  // 切换歌曲(默认切换到下一首)
+  changeNextSong(isNextSong = true) {
+    // 1.获取当前歌曲所在的索引
+    let index = this.data.playSongIndex
+    const length = this.data.playSongList.length
+    // 2.处理索引值
+    index = isNextSong ? index + 1 : index - 1
+    // 3.处理边界情况
+    if (index === length - 1) index = 0
+    if (index === -1) index = length - 1
+    // 4.获取当前索引值在播放列表中的数据
+    const newSong = this.data.playSongList[index]
+    console.log('newSong', newSong)
+    // 5.在store记录最新的索引
+    playSongListStore.setState('songIndex', index)
+  },
   // 获取仓库中的歌曲列表以及对应的索引
-  handleGetPlaySongInfos({songList, songIndex}) {
-    if(songList) {
-      this.setData({playSongList:songList})
+  handleGetPlaySongInfos({
+    songList,
+    songIndex
+  }) {
+    if (songList) {
+      this.setData({
+        playSongList: songList
+      })
     }
-    if(songIndex !== undefined) {
-      this.setData({playSongIndex: songIndex})
+    if (songIndex !== undefined) {
+      this.setData({
+        playSongIndex: songIndex
+      })
     }
   },
 
