@@ -12,6 +12,12 @@ import playSongListStore from '../../store/paly-song-store'
 const app = getApp()
 // 创建播放器
 const audioContext = wx.createInnerAudioContext()
+// 播放模式名称映射
+const PlayModeNameMap = {
+  0: 'order',
+  1: 'repeat',
+  2: 'random'
+}
 Page({
 
   /**
@@ -51,7 +57,11 @@ Page({
     // 当前播放歌曲的id
     playSongId: 0,
     // 只在第一次渲染时监听audioContext
-    isFirstPlay: true
+    isFirstPlay: true,
+    // 播放模式   0: 顺序播放  1: 单曲循环   2: 随机播放
+    playModeIndex: 0,
+    // 播放模式名称
+    playModeName: 'order'
   },
 
   /**
@@ -95,6 +105,7 @@ Page({
     })
 
     // 播放歌曲
+    audioContext.stop()
     audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
     audioContext.autoplay = true
 
@@ -215,11 +226,25 @@ Page({
     // 1.获取当前歌曲所在的索引
     let index = this.data.playSongIndex
     const length = this.data.playSongList.length
-    // 2.处理索引值
-    index = isNextSong ? index + 1 : index - 1
-    // 3.处理边界情况
-    if (index === length - 1) index = 0
-    if (index === -1) index = length - 1
+    // 2.处理索引值 ======> index的值其实就下一首歌的索引，所以播放模式也是在这里处理
+    switch (this.data.playModeIndex) {
+      // 顺序播放  ====> 正常的上一首和下一首切换
+      case 0:
+        index = isNextSong ? index + 1 : index - 1
+        // 3.处理边界情况
+        if (index === length - 1) index = 0
+        if (index === -1) index = length - 1
+        break;
+      // 单曲循环
+      case 1:
+        break
+      // 随机播放
+      case 2:
+        index = Math.floor(Math.random() * length)
+        break
+      default:
+        break;
+    }
     // 4.获取当前索引值在播放列表中的数据
     const newSong = this.data.playSongList[index]
     // 5.播放歌曲
@@ -235,6 +260,18 @@ Page({
     this.setupPlaySong(newSong.id)
     // 6.在store记录最新的索引
     playSongListStore.setState('songIndex', index)
+  },
+  // 切换音乐播放模式
+  handleChangePlayMode() {
+    let playModeIndex = this.data.playModeIndex
+    playModeIndex = playModeIndex + 1
+    // 边界处理
+    if (playModeIndex === 3) playModeIndex = 0
+    // 映射名称
+    this.setData({
+      playModeIndex,
+      playModeName: PlayModeNameMap[playModeIndex]
+    })
   },
   // 获取仓库中的歌曲列表以及对应的索引
   handleGetPlaySongInfos({

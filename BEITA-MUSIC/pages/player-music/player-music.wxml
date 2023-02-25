@@ -44,27 +44,17 @@
       <!-- 歌曲控制 -->
       <view class="control">
         <view class="operation">
-          <image class="btn btn-mode" src="/assets/images/player/play_order.png" />
-          <image 
-          class="btn btn-prev" 
-          src="/assets/images/player/play_prev.png" 
-          bindtap="handlePrevBtnMusic"/>
+          <image class="btn btn-mode" src="/assets/images/player/play_{{playModeName}}.png" bindtap="handleChangePlayMode" />
+          <image class="btn btn-prev" src="/assets/images/player/play_prev.png" bindtap="handlePrevBtnMusic" />
           <image class="btn btn-play" src="/assets/images/player/play_{{isPause ? 'resume':'pause'}}.png" bindtap="toggleMusicStatus" />
-          <image 
-          class="btn btn-next" 
-          src="/assets/images/player/play_next.png"
-          bindtap="handleNextBtnMusic" />
+          <image class="btn btn-next" src="/assets/images/player/play_next.png" bindtap="handleNextBtnMusic" />
           <image class="btn btn-music" src="/assets/images/player/play_music.png" />
         </view>
       </view>
     </swiper-item>
     <!-- 歌词 -->
     <swiper-item>
-      <scroll-view 
-      scroll-y 
-      class="scroll-container"
-      scroll-top="{{lyricScrollTop}}"
-      scroll-with-animation>
+      <scroll-view scroll-y class="scroll-container" scroll-top="{{lyricScrollTop}}" scroll-with-animation>
         <block wx:for="{{songLyric}}" wx:key="time">
           <view class="item {{ index === currentLyricIndex ? 'active' : '' }}" style="padding-top:{{index === 0 ? (swiperHeight/2) : 0}}px; padding-bottom:{{index === songLyric.length - 1 ? (swiperHeight/2) : 0 }}px">{{item.text}}</view>
         </block>
