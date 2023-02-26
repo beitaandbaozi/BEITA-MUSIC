@@ -179,6 +179,13 @@ Page({
     }
   },
 
+  // 點擊播放欄，跳轉到播放器頁面
+  handleToPlayer() {
+    wx.navigateTo({
+      url: '/pages/player-music/player-music',
+    })
+  },
+
   onUnload() {
     recommendStore.offState("recommendMusicInfo", (value) => {
       if (!value.tracks) return
@@ -186,7 +193,7 @@ Page({
       this.setData({
         recommendList: value.tracks.slice(0, 6)
       })
-    }),
+    })
     playSongListStore.offStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   }
 })

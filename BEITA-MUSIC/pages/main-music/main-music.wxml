@@ -44,7 +44,7 @@
     <view class="play-bar-placeholder"></view>
     <view class="play-bar">
       <view class="left">
-        <image class="album album-anim" style="animation-play-state: {{isPlaying ? 'running':'paused'}};" mode="aspectFill" src="{{currentSong.al.picUrl}}" />
+        <image class="album album-anim" style="animation-play-state: {{isPlaying ? 'running':'paused'}};" mode="aspectFill" src="{{currentSong.al.picUrl}}" bindtap="handleToPlayer" />
         <view class="name">{{currentSong.name}}</view>
       </view>
       <view class="right">

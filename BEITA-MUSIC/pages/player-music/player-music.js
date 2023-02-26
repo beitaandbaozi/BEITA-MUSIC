@@ -68,7 +68,11 @@ Page({
       swiperHeight: app.globalData.contentHeight
     })
     // 1.播放歌曲
-    playSongListStore.dispatch('playMusicWithSongIdAction', id)
+    // 1.1 如果id有值，説明是點擊一首新歌進去的，而不是退到首頁中的播放欄點擊進來的
+    // 首頁中點擊進來不需要傳id，因爲已經是傳進來過了，是退到才能顯示首頁中的播放欄
+    if (id) {
+      playSongListStore.dispatch('playMusicWithSongIdAction', id)
+    }
 
     // 2.获取存放在仓库中的歌曲列表
     playSongListStore.onStates(['playSongList', 'playSongListIndex'], this.handleGetPlaySongInfos)
@@ -78,7 +82,7 @@ Page({
 
 
   // ============================ 播放相關的業務 ======================
-  
+
   // 歌曲播放响应
   updateProgress: beitaThrottle(function (currentTime) {
     console.log('updateProgress')
@@ -240,8 +244,6 @@ Page({
     }
   },
   onUnload() {
-    // 停止播放
-    audioContext.stop()
     // 释放仓库中的数据
     playSongListStore.offStates(['playSongList', 'playSongListIndex'], this.handleGetPlaySongInfos)
     playSongListStore.offStates(this.data.storeKeys, this.handleGetStoreInfos)
