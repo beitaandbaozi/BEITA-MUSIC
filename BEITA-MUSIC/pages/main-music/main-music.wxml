@@ -40,15 +40,15 @@
   </block>
 
   <!-- 播放器 -->
-  <block wx:if="{{currentSong.id}}">
+  <block wx:if="{{currentSong.id || isPlaying}}">
     <view class="play-bar-placeholder"></view>
     <view class="play-bar">
       <view class="left">
-        <image class="album album-anim" mode="aspectFill" src="{{currentSong.al.picUrl}}" />
+        <image class="album album-anim" style="animation-play-state: {{isPlaying ? 'running':'paused'}};" mode="aspectFill" src="{{currentSong.al.picUrl}}" />
         <view class="name">{{currentSong.name}}</view>
       </view>
       <view class="right">
-        <image class="icon play" src="/assets/images/music/pause_icon.png" />
+        <image class="icon play" src="/assets/images/music/{{isPlaying ? 'pause':'play'}}_icon.png" bindtap="toggleCurrentPlayStatus" />
         <image class="icon playlist" src="/assets/images/music/playlist_icon.png" />
       </view>
     </view>

@@ -88,3 +88,17 @@ page {
   height: 25px;
   margin-right: 10rpx;
 }
+/* 播放動畫 */
+
+@keyframes albumRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.album-anim {
+  animation: albumRotate 10s linear infinite;
+}

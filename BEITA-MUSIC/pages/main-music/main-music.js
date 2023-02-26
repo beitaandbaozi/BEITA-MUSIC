@@ -40,7 +40,9 @@ Page({
     // 巅峰榜数据是否展示，性能优化
     isRankingInfoFlag: false,
     // 當前正在播放的歌曲
-    currentSong: {}
+    currentSong: {},
+    // 當前歌曲的播放狀態
+    isPlaying: false
   },
   onLoad() {
     this.featchData()
@@ -121,7 +123,7 @@ Page({
       })
     })
     // 獲取播放器數據
-    playSongListStore.onStates(['songDetail'], this.handleGetPlaySongInfos)
+    playSongListStore.onStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   },
   // 点击搜索框跳转到搜索页面
   handleToSearch() {
@@ -155,13 +157,26 @@ Page({
     playSongListStore.setState('playSongListIndex', index)
   },
 
+  // 播放欄中，切換歌曲的播放狀態
+  toggleCurrentPlayStatus() {
+    playSongListStore.dispatch('changeMusicStatusAction')
+  },
+
   // 獲取倉庫中播放器音樂的數據
   handleGetPlaySongInfos({
-    songDetail
+    songDetail,
+    isPlaying
   }) {
-    this.setData({
-      currentSong: songDetail
-    })
+    if (songDetail) {
+      this.setData({
+        currentSong: songDetail
+      })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({
+        isPlaying
+      })
+    }
   },
 
   onUnload() {
@@ -171,7 +186,7 @@ Page({
       this.setData({
         recommendList: value.tracks.slice(0, 6)
       })
-    })
-    playSongListStore.offStates(['songDetail'], this.handleGetPlaySongInfos)
+    }),
+    playSongListStore.offStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   }
 })
