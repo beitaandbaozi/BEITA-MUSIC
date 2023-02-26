@@ -182,7 +182,7 @@ Page({
   // 點擊播放欄，跳轉到播放器頁面
   handleToPlayer() {
     wx.navigateTo({
-      url: '/pages/player-music/player-music',
+      url: '/packPlayer/pages/player-music/player-music',
     })
   },
 

@@ -2,11 +2,23 @@
   "pages": [
     "pages/main-music/main-music",
     "pages/main-video/main-video",
-    "pages/detail-video/detail-video",
     "pages/detail-search/detail-search",
     "pages/detail-song/detail-song",
-    "pages/menu-more/menu-more",
-    "pages/player-music/player-music"
+    "pages/menu-more/menu-more"
+  ],
+  "subpackages": [
+    {
+      "root": "packVideo",
+      "pages": [
+        "pages/detail-video/detail-video"
+      ]
+    },
+    {
+      "root": "packPlayer",
+      "pages": [
+        "pages/player-music/player-music"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "dark",

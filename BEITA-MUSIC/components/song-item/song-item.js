@@ -27,7 +27,7 @@ Component({
   methods: {
     handleToPlayerMusic() {
       wx.navigateTo({
-        url: `/pages/player-music/player-music?id=${this.properties.itemData.id}`,
+        url: `/packPlayer/pages/player-music/player-music?id=${this.properties.itemData.id}`,
       })
     }
   }

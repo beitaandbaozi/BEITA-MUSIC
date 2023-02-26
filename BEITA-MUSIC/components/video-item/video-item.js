@@ -25,7 +25,7 @@ Component({
     handleToDetails() {
       let item = this.properties.videoItem
       wx.navigateTo({
-        url: `/pages/detail-video/detail-video?id=${item.id}`,
+        url: `/packVideo/pages/detail-video/detail-video?id=${item.id}`,
       })
     }
   }

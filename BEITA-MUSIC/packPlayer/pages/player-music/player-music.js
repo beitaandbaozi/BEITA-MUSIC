@@ -1,10 +1,10 @@
 import {
   beitaThrottle,
-} from '../../utils/common'
+} from '../../../utils/common'
 
 import playSongListStore, {
   audioContext
-} from '../../store/paly-song-store'
+} from '../../../store/paly-song-store'
 
 
 const app = getApp()

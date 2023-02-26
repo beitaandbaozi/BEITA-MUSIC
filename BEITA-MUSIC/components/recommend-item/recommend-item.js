@@ -24,7 +24,7 @@ Component({
     // 点击跳转到播放器
     handleToPlayerMusic() {
       wx.navigateTo({
-        url: `/pages/player-music/player-music?id=${this.properties.itemData.id}`,
+        url: `/packPlayer/pages/player-music/player-music?id=${this.properties.itemData.id}`,
       })
     }
   }
