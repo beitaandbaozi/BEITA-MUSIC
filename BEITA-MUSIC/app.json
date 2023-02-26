@@ -8,18 +8,29 @@
   ],
   "subpackages": [
     {
-      "root": "packVideo",
+      "root": "packageVideo",
+      "name": "video",
       "pages": [
         "pages/detail-video/detail-video"
       ]
     },
     {
-      "root": "packPlayer",
+      "root": "packagePlayer",
+      "name": "player",
       "pages": [
         "pages/player-music/player-music"
       ]
     }
   ],
+  "preloadRule": {
+    "pages/main-music/main-music": {
+      "network": "all",
+      "packages": [
+        "player",
+        "video"
+      ]
+    }
+  },
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
