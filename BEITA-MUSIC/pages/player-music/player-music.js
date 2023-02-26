@@ -148,6 +148,8 @@ Page({
       })
       audioContext.onEnded(() => {
         // 播放结束的响应事件
+        // 當前歌曲狀態為單曲循環時，不播放下一首歌曲
+        if (audioContext.loop) return;
         this.changeNextSong()
       })
     }
@@ -231,15 +233,14 @@ Page({
     // 2.处理索引值 ======> index的值其实就下一首歌的索引，所以播放模式也是在这里处理
     switch (this.data.playModeIndex) {
       // 顺序播放  ====> 正常的上一首和下一首切换
+      // 单曲循环
+      case 1:
       case 0:
         index = isNextSong ? index + 1 : index - 1
         // 3.处理边界情况
         if (index === length - 1) index = 0
         if (index === -1) index = length - 1
         break;
-        // 单曲循环
-      case 1:
-        break
         // 随机播放
       case 2:
         index = Math.floor(Math.random() * length)
@@ -269,6 +270,8 @@ Page({
     playModeIndex = playModeIndex + 1
     // 边界处理
     if (playModeIndex === 3) playModeIndex = 0
+    // 判斷是單曲循環的形式  ====> 當前歌曲狀態為循環播放
+    if (playModeIndex === 1) audioContext.loop = true
     // 映射名称
     this.setData({
       playModeIndex,
