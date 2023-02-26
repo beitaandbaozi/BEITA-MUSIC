@@ -203,7 +203,9 @@ Page({
     })
   },
   // 拖动进度条调整音乐播放时间
-  handleSliderChanging(event) {
+  // 這裏使用節流的原因是因爲 每次拖動的時候都會setData來更新currentTime
+  // 而且setData更新會導致頁面重新刷新 ====> 太頻繁了  ====> 節流來限制
+  handleSliderChanging: beitaThrottle(function (event) {
     const value = event.detail.value
     // 滑动此时不需要更改播放进度，而是松手之后才更改，所以不使用 audioContext.seek()
     // 由于 onTimeUpdate 一直都在运行 所以设置一个变量来控制一下
@@ -212,7 +214,7 @@ Page({
       currentTime,
       isSliderChanging: true
     })
-  },
+  }, 100),
   // 切换上一首歌曲
   handlePrevBtnMusic() {
     this.changeNextSong(false)
@@ -235,10 +237,10 @@ Page({
         if (index === length - 1) index = 0
         if (index === -1) index = length - 1
         break;
-      // 单曲循环
+        // 单曲循环
       case 1:
         break
-      // 随机播放
+        // 随机播放
       case 2:
         index = Math.floor(Math.random() * length)
         break
@@ -290,7 +292,7 @@ Page({
     }
   },
   // 导航返回
-  handleNavBack(){
+  handleNavBack() {
     wx.navigateBack()
   },
   onUnload() {
