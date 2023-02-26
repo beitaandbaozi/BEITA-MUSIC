@@ -146,8 +146,8 @@ Page({
   handleToGetPlaySongList(event) {
     const index = event.currentTarget.dataset.index
     // 将目前推荐歌曲里的歌曲放到仓库(store)中去
-    playSongListStore.setState('songList', this.data.recommendList)
-    playSongListStore.setState('songIndex', index)
+    playSongListStore.setState('playSongList', this.data.recommendList)
+    playSongListStore.setState('playSongListIndex', index)
   },
 
   onUnload() {

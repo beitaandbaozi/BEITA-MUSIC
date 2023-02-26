@@ -40,7 +40,14 @@ const playSongListStore = new HYEventStore({
     playModeIndex: 0,
   },
   actions: {
+    // 播放歌曲
     playMusicWithSongIdAction(ctx, id) {
+      // 把歌曲的狀態值清空 ====> 防止切換歌曲時，有殘影
+      ctx.songDetail = {}
+      ctx.currentTime = 0
+      ctx.durationTime = 0
+      ctx.songLyric = []
+
       // 设置当前播放歌曲ID
       ctx.playSongId = id
       // 改變歌曲狀態
@@ -98,9 +105,11 @@ const playSongListStore = new HYEventStore({
           // 當前歌曲狀態為單曲循環時，不播放下一首歌曲
           if (audioContext.loop) return;
           // TODO: 切換歌曲
+          this.dispatch('playNewMusicAction')
         })
       }
     },
+    // 改變歌曲播放狀態
     changeMusicStatusAction(ctx) {
       if (!audioContext.paused) {
         audioContext.pause()
@@ -110,6 +119,7 @@ const playSongListStore = new HYEventStore({
         ctx.isPlaying = true
       }
     },
+    // 改變歌曲的播放模式
     changePlayMode(ctx) {
       let playModeIndex = ctx.playModeIndex
       playModeIndex = playModeIndex + 1
@@ -119,10 +129,37 @@ const playSongListStore = new HYEventStore({
       if (playModeIndex === 1) audioContext.loop = true
       // 映射名称
       ctx.playModeIndex = playModeIndex
-      // this.setData({
-      //   playModeIndex,
-      //   playModeName: PlayModeNameMap[playModeIndex]
-      // })
+    },
+    // 切換歌曲
+    playNewMusicAction(ctx, isNextSong = true) {
+      // 1.获取当前歌曲所在的索引
+      let index = ctx.playSongIndex
+      const length = ctx.playSongList.length
+      // 2.处理索引值 ======> index的值其实就下一首歌的索引，所以播放模式也是在这里处理
+      switch (ctx.playModeIndex) {
+        // 顺序播放  ====> 正常的上一首和下一首切换
+        // 单曲循环
+        case 1:
+        case 0:
+          index = isNextSong ? index + 1 : index - 1
+          // 3.处理边界情况
+          if (index === length - 1) index = 0
+          if (index === -1) index = length - 1
+          break;
+          // 随机播放
+        case 2:
+          index = Math.floor(Math.random() * length)
+          break
+        default:
+          break;
+      }
+      // 4.获取当前索引值在播放列表中的数据
+      const newSong = ctx.playSongList[index]
+      // 5.播放歌曲
+      // 5.2 业务操作
+      this.dispatch('playMusicWithSongIdAction', newSong.id)
+      // 6.在store记录最新的索引
+      ctx.playSongIndex = index
     }
   }
 })

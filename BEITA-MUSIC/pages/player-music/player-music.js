@@ -41,7 +41,7 @@ Page({
     // 播放列表
     playSongList: [],
     // 当前歌曲在播放列表中的索引
-    playSongIndex: -1,
+    playSongListIndex: -1,
     // 当前播放歌曲的id
     playSongId: 0,
     // 只在第一次渲染时监听audioContext
@@ -71,7 +71,7 @@ Page({
     playSongListStore.dispatch('playMusicWithSongIdAction', id)
 
     // 2.获取存放在仓库中的歌曲列表
-    playSongListStore.onStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
+    playSongListStore.onStates(['playSongList', 'playSongListIndex'], this.handleGetPlaySongInfos)
     // 2.獲取存放在倉庫中的對應數據
     playSongListStore.onStates(this.data.storeKeys, this.handleGetStoreInfos)
   },
@@ -131,50 +131,11 @@ Page({
   }, 100),
   // 切换上一首歌曲
   handlePrevBtnMusic() {
-    this.changeNextSong(false)
+    playSongListStore.dispatch('playNewMusicAction', false)
   },
   // 切换下一首
   handleNextBtnMusic() {
-    this.changeNextSong()
-  },
-  // 切换歌曲(默认切换到下一首)
-  changeNextSong(isNextSong = true) {
-    // 1.获取当前歌曲所在的索引
-    let index = this.data.playSongIndex
-    const length = this.data.playSongList.length
-    // 2.处理索引值 ======> index的值其实就下一首歌的索引，所以播放模式也是在这里处理
-    switch (this.data.playModeIndex) {
-      // 顺序播放  ====> 正常的上一首和下一首切换
-      // 单曲循环
-      case 1:
-      case 0:
-        index = isNextSong ? index + 1 : index - 1
-        // 3.处理边界情况
-        if (index === length - 1) index = 0
-        if (index === -1) index = length - 1
-        break;
-        // 随机播放
-      case 2:
-        index = Math.floor(Math.random() * length)
-        break
-      default:
-        break;
-    }
-    // 4.获取当前索引值在播放列表中的数据
-    const newSong = this.data.playSongList[index]
-    // 5.播放歌曲
-    // 5.1 先把当前的数据清空
-    this.setData({
-      songDetail: {},
-      currentTime: 0,
-      durationTime: 0,
-      sliderValue: 0,
-      songLyric: []
-    })
-    // 5.2 业务操作
-    this.setupPlaySong(newSong.id)
-    // 6.在store记录最新的索引
-    playSongListStore.setState('songIndex', index)
+    playSongListStore.dispatch('playNewMusicAction')
   },
   // 切换音乐播放模式
   handleChangePlayMode() {
@@ -191,17 +152,17 @@ Page({
 
   // 获取仓库中的歌曲列表以及对应的索引
   handleGetPlaySongInfos({
-    songList,
-    songIndex
+    playSongList,
+    playSongListIndex
   }) {
-    if (songList) {
+    if (playSongList) {
       this.setData({
-        playSongList: songList
+        playSongList
       })
     }
-    if (songIndex !== undefined) {
+    if (playSongListIndex !== undefined) {
       this.setData({
-        playSongIndex: songIndex
+        playSongListIndex
       })
     }
   },
