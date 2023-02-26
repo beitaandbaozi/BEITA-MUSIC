@@ -28,14 +28,6 @@ Page({
     songDetail: {},
     // 歌词内容
     songLyric: [],
-    // 当前的页面，用于切换导航栏
-    currentPage: 0,
-    // 轮播图高度---> 由于导航的自定义，需要动态计算
-    swiperHeight: 500,
-    // 导航栏标题
-    pageNavTitle: ['歌曲', '歌词'],
-    // 歌曲是否暂停
-    isPause: false,
     // 当前歌曲播放到的时间
     currentTime: 0,
     // 歌曲总时间
@@ -61,7 +53,11 @@ Page({
     // 播放模式   0: 顺序播放  1: 单曲循环   2: 随机播放
     playModeIndex: 0,
     // 播放模式名称
-    playModeName: 'order'
+    playModeName: 'order',
+
+
+    // 倉庫中的key值
+    storeKeys: ['songDetail', 'songLyric', 'currentTime', 'durationTime', 'currentLyric', 'currentLyricIndex', 'playSongId']
   },
 
   /**
@@ -77,95 +73,23 @@ Page({
       swiperHeight: app.globalData.contentHeight
     })
     // 1.播放歌曲
-    this.setupPlaySong(id)
+    playSongListStore.dispatch('setupPlaySong', id)
 
-
-    // 获取存放在仓库中的歌曲列表
+    // 2.获取存放在仓库中的歌曲列表
     playSongListStore.onStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
+    // 2.獲取存放在倉庫中的對應數據
+    playSongListStore.onStates(this.data.storeKeys, this.handleGetStoreInfos)
   },
-  // ============================== 播放歌曲==============================
-  setupPlaySong(id) {
-    // 设置当前播放歌曲ID
-    this.setData({
-      playSongId: id
-    })
-    // 获取歌曲详情信息
-    getSongDetail(id).then(res => {
-      this.setData({
-        songDetail: res.songs[0],
-        durationTime: res.songs[0].dt
-      })
-    })
-    // 获取歌词信息
-    getSongLyric(id).then(res => {
-      const lrc = parseLyric(res.lrc.lyric)
-      this.setData({
-        songLyric: lrc
-      })
-    })
 
-    // 播放歌曲
-    audioContext.stop()
-    audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
-    audioContext.autoplay = true
-
-    // 监听歌曲播放进度
-    if (this.data.isFirstPlay) {
-      this.data.isFirstPlay = false
-      const throttle = beitaThrottle(this.updateProgress, 1000)
-      audioContext.onTimeUpdate(() => {
-        if (!this.data.isSliderChanging) {
-          throttle()
-        }
-        // 1.动态计算当前显示的歌词
-        if (!this.data.songLyric.length) return
-        let index = this.data.songLyric.length - 1;
-        for (let i = 0; i < this.data.songLyric.length; i++) {
-          const info = this.data.songLyric[i]
-          if (info.time > audioContext.currentTime * 1000) {
-            // 说明是在前一句歌词，还没到这一句
-            index = i - 1
-            break
-          }
-        }
-        // 防止同一时段同一时间更新同一句歌词
-        if (index === this.data.currentLyricIndex) return;
-        // 更新歌词
-        // 更新歌词需要滚动位置   ===> 其中 35 是为每一句歌词设置的高度
-        this.setData({
-          currentLyric: this.data.songLyric[index].text,
-          currentLyricIndex: index,
-          lyricScrollTop: 35 * index
-        })
-      })
-      audioContext.onWaiting(() => {
-        audioContext.pause()
-      })
-      audioContext.onCanplay(() => {
-        // 暂停时，调整进度时===> 不播放歌曲
-        if (this.data.isPause) return;
-        audioContext.play()
-      })
-      audioContext.onEnded(() => {
-        // 播放结束的响应事件
-        // 當前歌曲狀態為單曲循環時，不播放下一首歌曲
-        if (audioContext.loop) return;
-        this.changeNextSong()
-      })
-    }
-  },
   // 歌曲播放响应
-  updateProgress() {
-    // 1.记录当前时间
+  updateProgress: beitaThrottle(function (currentTime) {
+    // 記錄當前時間和当前播放进度条
+    const sliderValue = currentTime / this.data.durationTime * 100
     this.setData({
-      currentTime: audioContext.currentTime * 1000
-    })
-    // 2.记录当前播放进度条
-    const sliderValue = this.data.currentTime / this.data.durationTime * 100
-    this.setData({
+      currentTime,
       sliderValue: sliderValue
     })
-  },
+  }, 1000),
   // 轮播切换响应
   handleSwiperChange(event) {
     this.setData({
@@ -278,6 +202,15 @@ Page({
       playModeName: PlayModeNameMap[playModeIndex]
     })
   },
+  // 导航返回
+  handleNavBack() {
+    wx.navigateBack()
+  },
+
+
+
+  // ============================== store中的響應======================
+
   // 获取仓库中的歌曲列表以及对应的索引
   handleGetPlaySongInfos({
     songList,
@@ -294,14 +227,65 @@ Page({
       })
     }
   },
-  // 导航返回
-  handleNavBack() {
-    wx.navigateBack()
+  // 獲取存放在倉庫中的屬性
+  handleGetStoreInfos({
+    songDetail,
+    songLyric,
+    currentTime,
+    durationTime,
+    currentLyric,
+    currentLyricIndex,
+    playSongId
+  }) {
+    // 當前歌曲id
+    if (playSongId !== undefined) {
+      this.setData({
+        playSongId
+      })
+    }
+    // 當前歌曲的詳細内容
+    if (songDetail) {
+      this.setData({
+        songDetail
+      })
+    }
+    // 當前歌曲的播放進度時長
+    if (currentTime !== undefined) {
+      // 根據當前時間改變進度
+      this.updateProgress(currentTime)
+    }
+    // 當前歌曲的總時長
+    if (durationTime !== undefined) {
+      this.setData({
+        durationTime
+      })
+    }
+    // 當前歌曲的歌詞
+    if (songLyric) {
+      this.setData({
+        songLyric
+      })
+    }
+    // 當前歌曲正在播放的歌詞
+    if (currentLyric) {
+      this.setData({
+        currentLyric
+      })
+    }
+    // 當前歌曲正在播放的歌詞的索引
+    if (currentLyricIndex !== undefined) {
+      // 動態設置高度滾動的高度 ===> 35為設置的每一句歌詞的高度
+      this.setData({
+        currentLyricIndex,
+        lyricScrollTop: currentLyricIndex * 35
+      })
+    }
   },
   onUnload() {
     // 停止播放
     audioContext.stop()
     // 释放仓库中的数据
     playSongListStore.offStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
+    playSongListStore.offStates(this.data.storeKeys, this.handleGetStoreInfos)
   }
 })
