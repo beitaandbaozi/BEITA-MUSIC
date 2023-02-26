@@ -243,7 +243,7 @@ Page({
     // 停止播放
     audioContext.stop()
     // 释放仓库中的数据
-    playSongListStore.offStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
+    playSongListStore.offStates(['playSongList', 'playSongListIndex'], this.handleGetPlaySongInfos)
     playSongListStore.offStates(this.data.storeKeys, this.handleGetStoreInfos)
   }
 })
