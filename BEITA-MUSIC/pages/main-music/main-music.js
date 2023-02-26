@@ -12,6 +12,7 @@ import recommendStore from '../../store/recommend-store'
 import rankingStore from '../../store/ranking-store'
 import playSongListStore from '../../store/paly-song-store'
 
+
 const querySelectThrottle = beitaThrottle(querySelect, 100)
 const app = getApp()
 Page({
@@ -37,7 +38,9 @@ Page({
     // 巅峰榜
     rankingInfo: {},
     // 巅峰榜数据是否展示，性能优化
-    isRankingInfoFlag: false
+    isRankingInfoFlag: false,
+    // 當前正在播放的歌曲
+    currentSong: {}
   },
   onLoad() {
     this.featchData()
@@ -117,6 +120,8 @@ Page({
         rankingInfo: upRankingInfo,
       })
     })
+    // 獲取播放器數據
+    playSongListStore.onStates(['songDetail'], this.handleGetPlaySongInfos)
   },
   // 点击搜索框跳转到搜索页面
   handleToSearch() {
@@ -150,6 +155,15 @@ Page({
     playSongListStore.setState('playSongListIndex', index)
   },
 
+  // 獲取倉庫中播放器音樂的數據
+  handleGetPlaySongInfos({
+    songDetail
+  }) {
+    this.setData({
+      currentSong: songDetail
+    })
+  },
+
   onUnload() {
     recommendStore.offState("recommendMusicInfo", (value) => {
       if (!value.tracks) return
@@ -158,5 +172,6 @@ Page({
         recommendList: value.tracks.slice(0, 6)
       })
     })
+    playSongListStore.offStates(['songDetail'], this.handleGetPlaySongInfos)
   }
 })
