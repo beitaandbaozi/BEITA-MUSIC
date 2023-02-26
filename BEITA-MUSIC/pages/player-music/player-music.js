@@ -76,6 +76,9 @@ Page({
     playSongListStore.onStates(this.data.storeKeys, this.handleGetStoreInfos)
   },
 
+
+  // ============================ 播放相關的業務 ======================
+  
   // 歌曲播放响应
   updateProgress: beitaThrottle(function (currentTime) {
     console.log('updateProgress')
@@ -88,23 +91,6 @@ Page({
       sliderValue: sliderValue
     })
   }, 1000),
-  // 轮播切换响应
-  handleSwiperChange(event) {
-    this.setData({
-      currentPage: event.detail.current
-    })
-  },
-  // 点击标题，切换轮播图页面
-  onNavTabItemTap(event) {
-    const id = event.currentTarget.dataset.index
-    this.setData({
-      currentPage: id
-    })
-  },
-  // 暂停和播放音乐
-  toggleMusicStatus() {
-    playSongListStore.dispatch('changeMusicStatusAction')
-  },
   // 点进进度条调整音乐播放时间
   handleSliderChange(event) {
     const value = event.detail.value;
@@ -129,6 +115,11 @@ Page({
       isSliderChanging: true
     })
   }, 100),
+
+  // 暂停和播放音乐
+  toggleMusicStatus() {
+    playSongListStore.dispatch('changeMusicStatusAction')
+  },
   // 切换上一首歌曲
   handlePrevBtnMusic() {
     playSongListStore.dispatch('playNewMusicAction', false)
@@ -141,12 +132,26 @@ Page({
   handleChangePlayMode() {
     playSongListStore.dispatch('changePlayMode')
   },
+
+  // ============================ 其他事件響應 =================
+
+  // 轮播切换响应
+  handleSwiperChange(event) {
+    this.setData({
+      currentPage: event.detail.current
+    })
+  },
+  // 点击标题，切换轮播图页面
+  onNavTabItemTap(event) {
+    const id = event.currentTarget.dataset.index
+    this.setData({
+      currentPage: id
+    })
+  },
   // 导航返回
   handleNavBack() {
     wx.navigateBack()
   },
-
-
 
   // ============================== store中的響應======================
 
