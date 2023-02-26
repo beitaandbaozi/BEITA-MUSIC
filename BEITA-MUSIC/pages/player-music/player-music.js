@@ -46,15 +46,13 @@ Page({
     playSongId: 0,
     // 只在第一次渲染时监听audioContext
     isFirstPlay: true,
-    // 播放模式   0: 顺序播放  1: 单曲循环   2: 随机播放
-    playModeIndex: 0,
     // 播放模式名称
     playModeName: 'order',
     // 歌曲是否播放
     isPlaying: false,
 
     // 倉庫中的key值
-    storeKeys: ['songDetail', 'songLyric', 'currentTime', 'durationTime', 'currentLyric', 'currentLyricIndex', 'playSongId', 'isPlaying']
+    storeKeys: ['songDetail', 'songLyric', 'currentTime', 'durationTime', 'currentLyric', 'currentLyricIndex', 'playSongId', 'isPlaying', 'playModeIndex']
   },
 
   /**
@@ -105,7 +103,7 @@ Page({
   },
   // 暂停和播放音乐
   toggleMusicStatus() {
-    playSongListStore.dispatch('playMusicStatusAction')
+    playSongListStore.dispatch('changeMusicStatusAction')
   },
   // 点进进度条调整音乐播放时间
   handleSliderChange(event) {
@@ -180,17 +178,7 @@ Page({
   },
   // 切换音乐播放模式
   handleChangePlayMode() {
-    let playModeIndex = this.data.playModeIndex
-    playModeIndex = playModeIndex + 1
-    // 边界处理
-    if (playModeIndex === 3) playModeIndex = 0
-    // 判斷是單曲循環的形式  ====> 當前歌曲狀態為循環播放
-    if (playModeIndex === 1) audioContext.loop = true
-    // 映射名称
-    this.setData({
-      playModeIndex,
-      playModeName: PlayModeNameMap[playModeIndex]
-    })
+    playSongListStore.dispatch('changePlayMode')
   },
   // 导航返回
   handleNavBack() {
@@ -226,7 +214,8 @@ Page({
     currentLyric,
     currentLyricIndex,
     playSongId,
-    isPlaying
+    isPlaying,
+    playModeIndex
   }) {
     // 當前歌曲id
     if (playSongId !== undefined) {
@@ -275,6 +264,12 @@ Page({
     if (isPlaying !== undefined) {
       this.setData({
         isPlaying
+      })
+    }
+    // 當前歌曲的播放模式
+    if (playModeIndex !== undefined) {
+      this.setData({
+        playModeName: PlayModeNameMap[playModeIndex]
       })
     }
   },

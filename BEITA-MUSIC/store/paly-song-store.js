@@ -35,7 +35,9 @@ const playSongListStore = new HYEventStore({
     // 只在第一次渲染时监听audioContext
     isFirstPlay: true,
     // 歌曲是否在播放
-    isPlaying: false
+    isPlaying: false,
+    // 播放模式   0: 顺序播放  1: 单曲循环   2: 随机播放
+    playModeIndex: 0,
   },
   actions: {
     playMusicWithSongIdAction(ctx, id) {
@@ -99,7 +101,7 @@ const playSongListStore = new HYEventStore({
         })
       }
     },
-    playMusicStatusAction(ctx) {
+    changeMusicStatusAction(ctx) {
       if (!audioContext.paused) {
         audioContext.pause()
         ctx.isPlaying = false
@@ -107,6 +109,20 @@ const playSongListStore = new HYEventStore({
         audioContext.play()
         ctx.isPlaying = true
       }
+    },
+    changePlayMode(ctx) {
+      let playModeIndex = ctx.playModeIndex
+      playModeIndex = playModeIndex + 1
+      // 边界处理
+      if (playModeIndex === 3) playModeIndex = 0
+      // 判斷是單曲循環的形式  ====> 當前歌曲狀態為循環播放
+      if (playModeIndex === 1) audioContext.loop = true
+      // 映射名称
+      ctx.playModeIndex = playModeIndex
+      // this.setData({
+      //   playModeIndex,
+      //   playModeName: PlayModeNameMap[playModeIndex]
+      // })
     }
   }
 })
