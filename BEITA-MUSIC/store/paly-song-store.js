@@ -10,7 +10,7 @@ import {
 } from '../utils/common'
 
 // 创建播放器
-const audioContext = wx.createInnerAudioContext()
+export const audioContext = wx.createInnerAudioContext()
 
 const playSongListStore = new HYEventStore({
   state: {
@@ -34,11 +34,15 @@ const playSongListStore = new HYEventStore({
     playSongId: 0,
     // 只在第一次渲染时监听audioContext
     isFirstPlay: true,
+    // 歌曲是否在播放
+    isPlaying: false
   },
   actions: {
-    setupPlaySong(ctx, id) {
+    playMusicWithSongIdAction(ctx, id) {
       // 设置当前播放歌曲ID
       ctx.playSongId = id
+      // 改變歌曲狀態
+      ctx.isPlaying = true
       // 获取歌曲详情信息
       getSongDetail(id).then(res => {
         ctx.songDetail = res.songs[0]
@@ -84,7 +88,7 @@ const playSongListStore = new HYEventStore({
         })
         audioContext.onCanplay(() => {
           // 暂停时，调整进度时===> 不播放歌曲
-          // if (this.data.isPause) return;
+          if (!ctx.isPlaying) return;
           audioContext.play()
         })
         audioContext.onEnded(() => {
@@ -93,6 +97,15 @@ const playSongListStore = new HYEventStore({
           if (audioContext.loop) return;
           // TODO: 切換歌曲
         })
+      }
+    },
+    playMusicStatusAction(ctx) {
+      if (!audioContext.paused) {
+        audioContext.pause()
+        ctx.isPlaying = false
+      } else {
+        audioContext.play()
+        ctx.isPlaying = true
       }
     }
   }

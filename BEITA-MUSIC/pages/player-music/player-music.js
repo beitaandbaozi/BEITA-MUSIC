@@ -1,17 +1,13 @@
 import {
-  getSongDetail,
-  getSongLyric
-} from '../../api/music/music'
-import {
   beitaThrottle,
-  parseLyric
 } from '../../utils/common'
 
-import playSongListStore from '../../store/paly-song-store'
+import playSongListStore, {
+  audioContext
+} from '../../store/paly-song-store'
+
 
 const app = getApp()
-// 创建播放器
-const audioContext = wx.createInnerAudioContext()
 // 播放模式名称映射
 const PlayModeNameMap = {
   0: 'order',
@@ -54,10 +50,11 @@ Page({
     playModeIndex: 0,
     // 播放模式名称
     playModeName: 'order',
-
+    // 歌曲是否播放
+    isPlaying: false,
 
     // 倉庫中的key值
-    storeKeys: ['songDetail', 'songLyric', 'currentTime', 'durationTime', 'currentLyric', 'currentLyricIndex', 'playSongId']
+    storeKeys: ['songDetail', 'songLyric', 'currentTime', 'durationTime', 'currentLyric', 'currentLyricIndex', 'playSongId', 'isPlaying']
   },
 
   /**
@@ -73,7 +70,7 @@ Page({
       swiperHeight: app.globalData.contentHeight
     })
     // 1.播放歌曲
-    playSongListStore.dispatch('setupPlaySong', id)
+    playSongListStore.dispatch('playMusicWithSongIdAction', id)
 
     // 2.获取存放在仓库中的歌曲列表
     playSongListStore.onStates(['songList', 'songIndex'], this.handleGetPlaySongInfos)
@@ -83,6 +80,9 @@ Page({
 
   // 歌曲播放响应
   updateProgress: beitaThrottle(function (currentTime) {
+    console.log('updateProgress')
+    // !!! 當在拖動整個進度條時，就不要更新了 ====> 等鬆開時更新
+    if (this.data.isSliderChanging) return;
     // 記錄當前時間和当前播放进度条
     const sliderValue = currentTime / this.data.durationTime * 100
     this.setData({
@@ -105,17 +105,7 @@ Page({
   },
   // 暂停和播放音乐
   toggleMusicStatus() {
-    if (!this.data.isPause) {
-      audioContext.pause()
-      this.setData({
-        isPause: true
-      })
-    } else {
-      audioContext.play()
-      this.setData({
-        isPause: false
-      })
-    }
+    playSongListStore.dispatch('playMusicStatusAction')
   },
   // 点进进度条调整音乐播放时间
   handleSliderChange(event) {
@@ -235,7 +225,8 @@ Page({
     durationTime,
     currentLyric,
     currentLyricIndex,
-    playSongId
+    playSongId,
+    isPlaying
   }) {
     // 當前歌曲id
     if (playSongId !== undefined) {
@@ -278,6 +269,12 @@ Page({
       this.setData({
         currentLyricIndex,
         lyricScrollTop: currentLyricIndex * 35
+      })
+    }
+    // 當前歌曲的播放狀態
+    if (isPlaying !== undefined) {
+      this.setData({
+        isPlaying
       })
     }
   },
