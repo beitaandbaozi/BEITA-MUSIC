@@ -92,3 +92,23 @@ export const parseLyric = (lyricString) => {
 
   return lyricInfos
 }
+
+// 可视化区域加载API
+export const useLazyData = (element, apiFun) => {
+  return new Promise((resolve, reject) => {
+    // 创建实例
+    const interObserver = wx.createIntersectionObserver()
+    // 设置监听器回调
+    interObserver.relativeToViewport().observe(element, (res) => {
+      // 如果元素进入可视区，发起API请求加载内容
+      if (res.intersectionRatio > 0) {
+        console.log(element,'进入可视区')
+        // 取消监听器
+        interObserver.disconnect()
+        apiFun().then(res => {
+          resolve(res)
+        })
+      }
+    })
+  })
+}

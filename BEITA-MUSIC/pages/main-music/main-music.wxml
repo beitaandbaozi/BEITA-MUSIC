@@ -23,7 +23,7 @@
       </view>
     </block>
     <block wx:else="{{recommendList.length < 0}}">
-      <van-skeleton row="6" />
+      <van-skeleton row="12" />
     </block>
   </view>
 

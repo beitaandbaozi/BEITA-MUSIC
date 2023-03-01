@@ -5,7 +5,8 @@ import {
 
 import {
   querySelect,
-  beitaThrottle
+  beitaThrottle,
+  useLazyData
 } from "../../utils/common"
 
 import recommendStore from '../../store/recommend-store'
