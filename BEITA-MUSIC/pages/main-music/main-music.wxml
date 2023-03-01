@@ -8,24 +8,32 @@
         <image class="image" src="{{item.imageUrl}}" mode="widthFix" bindload="handleComputedBunnerHeight"></image>
       </swiper-item>
     </block>
+    <block wx:if="{{bannerList.length < 0}}">
+      <van-skeleton row="3" />
+    </block>
   </swiper>
   <!-- 推荐歌曲 -->
-  <block wx:if="{{recommendList.length}}">
-    <view class="recommend">
-      <area-header title="推荐歌曲" bind:toMoreMusic="handleToMoreMusic" />
+  <view class="recommend">
+    <area-header title="推荐歌曲" bind:toMoreMusic="handleToMoreMusic" />
+    <block wx:if="{{recommendList.length}}">
       <view class="recommend-list">
         <block wx:for="{{recommendList}}" wx:key="id">
           <recommend-item itemData="{{item}}" bindtap="handleToGetPlaySongList" data-index="{{index}}" />
         </block>
       </view>
-    </view>
-  </block>
+    </block>
+    <block wx:else="{{recommendList.length < 0}}">
+      <van-skeleton row="6" />
+    </block>
+  </view>
+
   <!-- 热门歌单 -->
   <block wx:if="{{hotMusicList.length}}">
     <menu-area title="热门歌单" musicList="{{hotMusicList}}" />
   </block>
+
+  <!-- 推荐歌单 -->
   <block wx:if="{{recommendMusicList.length}}">
-    <!-- 推荐歌单 -->
     <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />
   </block>
 

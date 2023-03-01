@@ -2,6 +2,7 @@
   "navigationBarBackgroundColor": "#fafafa",
   "usingComponents": {
     "van-search": "@vant/weapp/search/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
     "area-header": "/components/area-header/area-header",
     "recommend-item": "/components/recommend-item/recommend-item",
     "menu-area": "/components/menu-area/menu-area",
