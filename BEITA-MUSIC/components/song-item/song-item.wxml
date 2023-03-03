@@ -9,4 +9,5 @@
       <text>{{format.formatSinger(itemData.ar)}}</text>
     </view>
   </view>
+  <van-icon name="more-o" class="icon" catchtap="handleMoreIconTap"/>
 </view>

@@ -31,3 +31,8 @@
   height: 22rpx;
   margin-right: 10rpx;
 }
+
+.icon {
+  margin-right: 20rpx;
+  font-size: 40rpx;
+}
