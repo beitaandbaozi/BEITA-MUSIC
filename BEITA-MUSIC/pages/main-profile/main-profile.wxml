@@ -4,4 +4,13 @@
     <image src="{{isLogin ? userInfo.avatarUrl : '../../assets/images/icons/avatar-default.png'}}" mode="widthFix" class="avatar" />
     <text class="content">{{isLogin ? userInfo.nickName: '未登录'}}</text>
   </view>
+  <!-- 我的收藏、我的喜欢、历史记录 -->
+  <view class="section tabs">
+    <block wx:for="{{tabs}}" wx:key="type">
+      <view class="item">
+        <image src="../../assets/images/music/{{item.type}}.png" mode="widthFix" class="icon" />
+        <text class="name">{{item.name}}</text>
+      </view>
+    </block>
+  </view>
 </view>

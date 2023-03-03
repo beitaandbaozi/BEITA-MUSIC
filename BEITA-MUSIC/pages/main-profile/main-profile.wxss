@@ -10,6 +10,7 @@ page {
   border-radius: 12rpx;
 }
 
+/* 个人信息 */
 .self-infos {
   display: flex;
   align-items: center;
@@ -24,4 +25,29 @@ page {
 
 .self-infos .content {
   margin-left: 20rpx;
+}
+
+/* 我的收藏、我的喜爱、历史记录 */
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.tabs .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs .item .icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.item .name {
+  margin-top: 16rpx;
+  font-size: 24rpx;
 }

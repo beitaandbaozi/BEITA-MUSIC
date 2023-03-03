@@ -4,7 +4,21 @@ Page({
     // 是否已经登录
     isLogin: false,
     // 个人信息
-    userInfo: {}
+    userInfo: {},
+    // tabs信息
+    tabs: [{
+        name: '我的收藏',
+        type: 'favor'
+      },
+      {
+        name: '我的喜欢',
+        type: 'like'
+      },
+      {
+        name: '历史记录',
+        type: 'history'
+      }
+    ]
   },
   onLoad() {
     // 判断用户是否已经登录
