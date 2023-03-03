@@ -56,6 +56,13 @@
           "query": "id=208891",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/main-profile/main-profile",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

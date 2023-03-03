@@ -1,0 +1,26 @@
+page {
+  padding: 30rpx;
+  box-sizing: border-box;
+  background: #f3f3f3;
+}
+
+.section {
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 12rpx;
+}
+
+.self-infos {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.self-infos .avatar {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.self-infos .content {
+  margin-left: 20rpx;
+}

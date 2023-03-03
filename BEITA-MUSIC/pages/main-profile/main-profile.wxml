@@ -1,0 +1,7 @@
+<view class="main-profile">
+  <!-- 1.登录信息 -->
+  <view class="section self-infos">
+    <image src="../../assets/images/icons/avatar-default.png" mode="widthFix" class="avatar" />
+    <text class="content">未登录</text>
+  </view>
+</view>
