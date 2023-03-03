@@ -20,5 +20,7 @@ App({
         this.globalData.contentHeight = res.screenHeight - res.statusBarHeight - this.globalData.defineNavBarHeight
       }
     })
+    // 注册云开发
+    wx.cloud.init()
   }
 })

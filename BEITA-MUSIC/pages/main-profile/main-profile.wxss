@@ -19,6 +19,7 @@ page {
 .self-infos .avatar {
   width: 100rpx;
   height: 100rpx;
+  border-radius: 50%;
 }
 
 .self-infos .content {
