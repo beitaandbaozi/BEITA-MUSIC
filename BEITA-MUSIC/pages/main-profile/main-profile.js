@@ -1,6 +1,7 @@
 import {
   menuCollection
 } from '../../database/index'
+import menuStore from '../../store/menu-store'
 
 Page({
   data: {
@@ -25,7 +26,9 @@ Page({
     // 创建歌单对话框
     isShowDialog: false,
     // 歌单名称
-    menuName: ""
+    menuName: "",
+    // 歌单列表
+    menuList: []
   },
   onLoad() {
     // 判断用户是否已经登录
@@ -39,6 +42,8 @@ Page({
         userInfo
       })
     }
+    // 仓库中的歌单数据
+    menuStore.onState("menuList", this.handleMenuStore)
   },
   //========================== 事件绑定 =========================
   // 登录
@@ -92,5 +97,14 @@ Page({
         title: `创建歌单成功`,
       })
     }
+  },
+  //  ============================= store中的事件 =======================
+  handleMenuStore(value) {
+    this.setData({
+      menuList: value
+    })
+  },
+  onUnload() {
+    menuStore.offState("menuList", this.handleMenuStore)
   }
 })
