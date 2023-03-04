@@ -6,6 +6,7 @@ page {
 
 .section {
   padding: 30rpx;
+  margin-bottom: 30rpx;
   background: #fff;
   border-radius: 12rpx;
 }
@@ -33,7 +34,6 @@ page {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 30rpx;
 }
 
 .tabs .item {
@@ -50,4 +50,23 @@ page {
 .item .name {
   margin-top: 16rpx;
   font-size: 24rpx;
+}
+
+/* 我的歌单 */
+.menu .create-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: lightgray;
+}
+
+/* 创建歌单对话框 */
+.input {
+  margin: 30rpx;
+  padding: 0 15rpx;
+  border-radius: 12rpx;
+  border: 1px solid lightgray;
+  height: 60rpx;
+  font-size: 28rpx;
 }

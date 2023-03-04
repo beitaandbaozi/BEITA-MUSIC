@@ -1,4 +1,7 @@
-// pages/main-profile/main-profile.js
+import {
+  menuCollection
+} from '../../database/index'
+
 Page({
   data: {
     // 是否已经登录
@@ -18,7 +21,11 @@ Page({
         name: '历史记录',
         type: 'history'
       }
-    ]
+    ],
+    // 创建歌单对话框
+    isShowDialog: false,
+    // 歌单名称
+    menuName: ""
   },
   onLoad() {
     // 判断用户是否已经登录
@@ -61,5 +68,29 @@ Page({
     wx.navigateTo({
       url: `/pages/detail-song/detail-song?type=profile&tabname=${item.type}&title=${item.name}`,
     })
+  },
+  // 点击打开创建歌单对话框
+  handleShowDialog() {
+    this.setData({
+      isShowDialog: true
+    })
+  },
+  // 创建歌单
+  async handleCreateMenu() {
+    // 1.拼接数据
+    const menuName = this.data.menuName
+    // 2.模拟歌单数据
+    const menuRecord = {
+      name: menuName,
+      songList: []
+    }
+    // 3.连接数据库
+    const res = await menuCollection.add(menuRecord)
+    // 4.提示信息
+    if (res) {
+      wx.showToast({
+        title: `创建歌单成功`,
+      })
+    }
   }
 })

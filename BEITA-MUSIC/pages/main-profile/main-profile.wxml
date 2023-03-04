@@ -13,4 +13,20 @@
       </view>
     </block>
   </view>
+  <!-- 我的歌单 -->
+  <view class="profile-menu">
+    <area-header title="我的歌单" hasMore="{{false}}" />
+    <view class="section menu">
+      <!-- 创建歌单 -->
+      <view class="create-menu">
+        <text>创建歌单</text>
+        <van-icon name="plus" bindtap="handleShowDialog" />
+      </view>
+    </view>
+  </view>
 </view>
+
+<!-- dialog -->
+<van-dialog use-slot title="创建歌单" show="{{ isShowDialog }}" show-cancel-button bind:confirm="handleCreateMenu">
+  <input type="text" model:value="{{menuName}}" class="input" placeholder="请输入歌单名字" />
+</van-dialog>
