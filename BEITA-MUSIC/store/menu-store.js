@@ -16,6 +16,7 @@ const menuStore = new HYEventStore({
     async fetchMenuListAction(ctx) {
       // 1.获取数据库中对应用户的歌单数据
       const res = await menuCollection.query()
+      // 2.赋值
       ctx.menuList = res.data
     }
   }

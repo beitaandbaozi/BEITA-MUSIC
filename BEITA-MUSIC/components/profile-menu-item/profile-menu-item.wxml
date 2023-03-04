@@ -1,0 +1,13 @@
+<view class="profile-menu-item">
+  <!-- 歌单头像 -->
+  <block wx:if="{{itemData.songList.length === 0}}">
+    <image src="../../assets/images/icons/menu-avatar.png" mode="widthFix" class="avatar"/>
+  </block>
+  <!-- 信息 -->
+  <view class="infos">
+    <view class="title">{{itemData.name}}</view>
+    <view class="count">{{itemData.songList.length}}首</view>
+  </view>
+  <!-- icon -->
+  <van-icon name="delete-o" class="icon" bindtap="handleDeleteMenu"/>
+</view>

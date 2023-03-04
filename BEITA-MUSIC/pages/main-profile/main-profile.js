@@ -96,6 +96,8 @@ Page({
       wx.showToast({
         title: `创建歌单成功`,
       })
+      // 重新获取数据库信息，刷新页面数据
+      menuStore.dispatch("fetchMenuListAction")
     }
   },
   //  ============================= store中的事件 =======================

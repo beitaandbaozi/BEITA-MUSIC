@@ -22,6 +22,12 @@
         <text>创建歌单</text>
         <van-icon name="plus" bindtap="handleShowDialog" />
       </view>
+      <!-- 歌单列表 -->
+      <view class="menu-list">
+        <block wx:for="{{menuList}}" wx:key="_id">
+          <profile-menu-item itemData="{{item}}" />
+        </block>
+      </view>
     </view>
   </view>
 </view>
