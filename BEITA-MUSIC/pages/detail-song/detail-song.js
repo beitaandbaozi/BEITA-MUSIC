@@ -5,11 +5,13 @@ import playSongListStore from '../../store/paly-song-store'
 import {
   getRecommendList
 } from '../../api/music/music'
+// 连接数据库
+const database = wx.cloud.database()
 Page({
   data: {
     type: 'ranking',
     key: 'newRanking',
-    musicList: [],
+    musicList: {},
     // 因为推荐歌单的接口其实是我接了热门歌单的 所以用一个变量来替代本来的名称
     titleName: '',
     // 歌单详情的id
@@ -48,7 +50,30 @@ Page({
       wx.setNavigationBarTitle({
         title: this.data.title,
       })
+    } else if (type === 'profile') {
+      const colName = options.tabname
+      const title = options.title
+      this.handleProfileTabInfo(colName, title)
     }
+  },
+  // 处理个人中心tabs数据
+  async handleProfileTabInfo(tabname, title) {
+    // 1.获取对应的集合
+    const collection = database.collection(`c_${tabname}`)
+    // 2.获取对应的数据
+    const res = await collection.where({
+      _openid: wx.getStorageSync('openId')
+    }).get()
+    this.setData({
+      musicList: {
+        name: title,
+        tracks: res.data
+      }
+    })
+    // 3.设置对应的导航标题
+    wx.setNavigationBarTitle({
+      title
+    })
   },
   handleStoreCallback(value) {
     this.setData({
@@ -72,6 +97,5 @@ Page({
     } else if (this.data.type === 'recommend') {
       recommendStore.offState("recommendMusicInfo", this.handleStoreCallback)
     }
-
   }
 })

@@ -53,5 +53,13 @@ Page({
       isLogin: true,
       userInfo: profileRes.userInfo
     })
+  },
+  // 点击tabs
+  handleToTabsItem(event) {
+    const item = event.currentTarget.dataset.item
+    // 跳转
+    wx.navigateTo({
+      url: `/pages/detail-song/detail-song?type=profile&tabname=${item.type}&title=${item.name}`,
+    })
   }
 })

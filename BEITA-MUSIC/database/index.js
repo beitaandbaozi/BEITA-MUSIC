@@ -37,3 +37,4 @@ BEITADATABASE.prototype.query = function (offset = 0, size = 20, condition = {},
 
 export const favorCollection = new BEITADATABASE('c_favor')
 export const likeCollection = new BEITADATABASE('c_like')
+export const historyCollection = new BEITADATABASE('c_history')

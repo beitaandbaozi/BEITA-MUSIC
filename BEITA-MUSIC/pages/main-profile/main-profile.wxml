@@ -7,7 +7,7 @@
   <!-- 我的收藏、我的喜欢、历史记录 -->
   <view class="section tabs">
     <block wx:for="{{tabs}}" wx:key="type">
-      <view class="item">
+      <view class="item" bindtap="handleToTabsItem" data-item="{{item}}">
         <image src="../../assets/images/music/{{item.type}}.png" mode="widthFix" class="icon" />
         <text class="name">{{item.name}}</text>
       </view>

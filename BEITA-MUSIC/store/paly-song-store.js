@@ -8,6 +8,9 @@ import {
 import {
   parseLyric
 } from '../utils/common'
+import {
+  historyCollection
+} from '../database/index'
 
 // 创建播放器
 export const audioContext = wx.createInnerAudioContext()
@@ -56,6 +59,9 @@ const playSongListStore = new HYEventStore({
       getSongDetail(id).then(res => {
         ctx.songDetail = res.songs[0]
         ctx.durationTime = res.songs[0].dt
+
+        // 将改歌曲信息添加到历史记录数据库中
+        historyCollection.add(ctx.songDetail)
       })
       // 获取歌词信息
       getSongLyric(id).then(res => {
