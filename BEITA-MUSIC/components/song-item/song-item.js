@@ -1,7 +1,8 @@
 // 连接数据库
-const database = wx.cloud.database()
-const favorCol = database.collection('c_favor')
-const likeCol = database.collection('c_like')
+import {
+  favorCollection,
+  likeCollection
+} from '../../database/index'
 Component({
   /**
    * 组件的属性列表
@@ -51,15 +52,11 @@ Component({
       switch (index) {
         // 收藏
         case 0:
-          res = await favorCol.add({
-            data: this.properties.itemData
-          })
+          res = await favorCollection.add(this.properties.itemData)
           break;
           // 喜爱
         case 1:
-          res = await likeCol.add({
-            data: this.properties.itemData
-          })
+          res = await likeCollection.add(this.properties.itemData)
           break;
         default:
           break;
