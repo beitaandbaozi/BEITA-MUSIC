@@ -6,8 +6,8 @@
 }
 
 .avatar {
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
   border-radius: 12rpx;
 }
 

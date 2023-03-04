@@ -1,6 +1,7 @@
 import rankingStore from '../../store/ranking-store'
 import recommendStore from '../../store/recommend-store'
 import playSongListStore from '../../store/paly-song-store'
+import menuStore from '../../store/menu-store'
 
 import {
   getRecommendList
@@ -15,7 +16,9 @@ Page({
     // 因为推荐歌单的接口其实是我接了热门歌单的 所以用一个变量来替代本来的名称
     titleName: '',
     // 歌单详情的id
-    id: -1
+    id: -1,
+    // 歌单列表
+    menuList: []
   },
   onLoad(options) {
     // 通过路由中的type来判断展示对应的数据
@@ -50,11 +53,16 @@ Page({
       wx.setNavigationBarTitle({
         title: this.data.title,
       })
-    } else if (type === 'profile') {
+    }
+    // 我的收藏、我的喜欢、历史记录
+    else if (type === 'profile') {
       const colName = options.tabname
       const title = options.title
       this.handleProfileTabInfo(colName, title)
     }
+
+    // 获取仓库中的歌单数据
+    menuStore.onState("menuList", this.handleMenuStore)
   },
   // 处理个人中心tabs数据
   async handleProfileTabInfo(tabname, title) {
@@ -91,11 +99,19 @@ Page({
     playSongListStore.setState('playSongList', this.data.musicList.tracks)
     playSongListStore.setState('playSongListIndex', index)
   },
+  // 获取我的歌单仓库数据
+  handleMenuStore(value) {
+    this.setData({
+      menuList: value
+    })
+  },
+
   onUnload() {
     if (this.data.type === 'ranking') {
       rankingStore.offState(this.data.key, this.handleStoreCallback)
     } else if (this.data.type === 'recommend') {
       recommendStore.offState("recommendMusicInfo", this.handleStoreCallback)
     }
+    menuStore.offState("menuList", this.handleMenuStore)
   }
 })
