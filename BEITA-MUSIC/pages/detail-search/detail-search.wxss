@@ -1,1 +1,37 @@
-/* pages/detail-search/detail-search.wxss */
+page {
+  /* 更改Search框背景颜色 */
+  --search-background-color: #fff;
+  /* 更改Search框padding */
+  --search-padding: 10px 0;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background: #f3f3f3;
+}
+
+.detail-search .search-btn {
+  margin-left: 20rpx;
+}
+
+.detail-search .section {
+  margin-bottom: 30rpx;
+}
+
+.section .title {
+  font-size: 28rpx;
+}
+
+.section .list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.section .list .item {
+  padding: 5rpx 20rpx;
+  margin: 0 10rpx 10rpx 0;
+  background-color: #fff;
+  border-radius: 20rpx;
+  color: #c8c9cc;
+  font-size: 26rpx;
+}
