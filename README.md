@@ -8,7 +8,13 @@ BEITA-MUSIC是基于微信原生小程序开发的音乐应用，组件方面配
 
 ### 音乐
 
-![main-music-v1](https://raw.githubusercontent.com/beitaandbaozi/BEITA-MUSIC/main/demo-image/main-music-v1.png)
+![main-music-v1](https://raw.githubusercontent.com/beitaandbaozi/BEITA-MUSIC/main/demo-image/main-music-v1.png)![main-music-v2](https://raw.githubusercontent.com/beitaandbaozi/BEITA-MUSIC/main/demo-image/main-music-v2.png)![main-music-v3](https://raw.githubusercontent.com/beitaandbaozi/BEITA-MUSIC/main/demo-image/main-music-v3.png)
+
+
+
+#### 推荐歌曲
+
+
 
 
 
