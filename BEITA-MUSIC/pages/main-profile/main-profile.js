@@ -100,6 +100,15 @@ Page({
       menuStore.dispatch("fetchMenuListAction")
     }
   },
+  // 点击歌单跳转到详情页面
+  handleToMenuSingDetail(event) {
+    const item = event.currentTarget.dataset.item
+    // 跳转到详情页面
+    wx.navigateTo({
+      url: `/pages/detail-song/detail-song?type=profileMenu&id=${item._id}`,
+    })
+
+  },
   //  ============================= store中的事件 =======================
   handleMenuStore(value) {
     this.setData({

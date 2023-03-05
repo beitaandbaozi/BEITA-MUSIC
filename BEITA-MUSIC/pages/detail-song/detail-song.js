@@ -6,8 +6,11 @@ import menuStore from '../../store/menu-store'
 import {
   getRecommendList
 } from '../../api/music/music'
+import {
+  database,
+  menuCollection
+} from '../../database/index'
 // 连接数据库
-const database = wx.cloud.database()
 Page({
   data: {
     type: 'ranking',
@@ -21,6 +24,9 @@ Page({
     menuList: []
   },
   onLoad(options) {
+    // 获取仓库中的歌单数据
+    menuStore.onState("menuList", this.handleMenuStore)
+
     // 通过路由中的type来判断展示对应的数据
     // recommend 推荐歌曲    ranking 巅峰榜歌曲
     const {
@@ -60,9 +66,29 @@ Page({
       const title = options.title
       this.handleProfileTabInfo(colName, title)
     }
-
-    // 获取仓库中的歌单数据
-    menuStore.onState("menuList", this.handleMenuStore)
+    // 用户歌单
+    else if (type === 'profileMenu') {
+      const _id = options.id
+      this.handleProfieMenuInfo(_id)
+    }
+  },
+  // 处理个人中心歌单数据 ===> 详情页
+  handleProfieMenuInfo(id) {
+    // 通过id筛选出具体的歌单
+    const menuItem = this.data.menuList.filter(item => item._id === id)
+    // 针对数据拼接musicList数据
+    const name = menuItem[0].name
+    const tracks = menuItem[0].songList
+    this.setData({
+      musicList: {
+        name,
+        tracks
+      }
+    })
+    // 3.设置对应的导航标题
+    wx.setNavigationBarTitle({
+      title: name
+    })
   },
   // 处理个人中心tabs数据
   async handleProfileTabInfo(tabname, title) {
