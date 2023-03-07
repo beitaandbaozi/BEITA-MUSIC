@@ -14,7 +14,7 @@ App({
     // 获取屏幕宽度和高度
     wx.getSystemInfo({
       success: (res) => {
-        this.globalData.screenHeight = res.screenWidth
+        this.globalData.screenWidth = res.screenWidth
         this.globalData.screenHeight = res.screenHeight
         this.globalData.statusHeight = res.statusBarHeight
         this.globalData.contentHeight = res.screenHeight - res.statusBarHeight - this.globalData.defineNavBarHeight

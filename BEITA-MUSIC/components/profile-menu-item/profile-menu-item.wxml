@@ -12,5 +12,5 @@
     <view class="count">{{itemData.songList.length}}首</view>
   </view>
   <!-- icon -->
-  <van-icon name="delete-o" class="icon" bindtap="handleDeleteMenu" />
+  <van-icon name="delete-o" class="icon" catchtap="handleDeleteMenu" />
 </view>
