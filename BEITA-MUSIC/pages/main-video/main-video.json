@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "video-item": "/components/video-item/video-item"
+    "video-item": "/components/video-item/video-item",
+    "player-tabBar": "/components/player-tabBar/player-tabBar"
   },
   "navigationBarTitleText": "BEITAVIDEO",
   "enablePullDownRefresh": true

@@ -9,4 +9,8 @@
       ✔✔✔ 已经加载完全部数据啦 ❗❗❗
     </view>
   </block>
+  <!-- 播放器 -->
+  <block wx:if="{{currentSong.id || isPlaying}}">
+    <player-tabBar currentSong="{{currentSong}}" isPlaying="{{isPlaying}}" />
+  </block>
 </view>

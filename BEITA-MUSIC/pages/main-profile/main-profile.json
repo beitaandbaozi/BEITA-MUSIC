@@ -2,6 +2,7 @@
   "usingComponents": {
     "area-header": "/components/area-header/area-header",
     "profile-menu-item": "/components/profile-menu-item/profile-menu-item",
+    "player-tabBar": "/components/player-tabBar/player-tabBar",
     "van-icon": "@vant/weapp/icon/index",
     "van-dialog": "@vant/weapp/dialog/index"
   }

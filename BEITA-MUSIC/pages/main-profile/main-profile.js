@@ -2,7 +2,7 @@ import {
   menuCollection
 } from '../../database/index'
 import menuStore from '../../store/menu-store'
-
+import playSongListStore from '../../store/paly-song-store'
 Page({
   data: {
     // 是否已经登录
@@ -28,7 +28,11 @@ Page({
     // 歌单名称
     menuName: "",
     // 歌单列表
-    menuList: []
+    menuList: [],
+    // 当前播放的歌曲
+    currentSong: {},
+    // 播放状态
+    isPlaying: false
   },
   onLoad() {
     // 判断用户是否已经登录
@@ -44,6 +48,8 @@ Page({
     }
     // 仓库中的歌单数据
     menuStore.onState("menuList", this.handleMenuStore)
+    // 获取当前正在播放的歌曲
+    playSongListStore.onStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   },
   //========================== 事件绑定 =========================
   // 登录
@@ -115,7 +121,23 @@ Page({
       menuList: value
     })
   },
+  handleGetPlaySongInfos({
+    songDetail,
+    isPlaying
+  }) {
+    if (songDetail) {
+      this.setData({
+        currentSong: songDetail
+      })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({
+        isPlaying
+      })
+    }
+  },
   onUnload() {
     menuStore.offState("menuList", this.handleMenuStore)
+    playSongListStore.offStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   }
 })

@@ -4,9 +4,7 @@
     <view slot="action" class="search-btn" bindtap="handleSearch">搜索</view>
   </van-search>
   <!-- 搜索历史 -->
-  <view class="section search-history">
-
-  </view>
+  <view class="section search-history"></view>
   <!-- 猜你喜欢 -->
   <view class="section guess-user-like">
     <view class="title">猜你喜欢</view>
@@ -16,4 +14,8 @@
       </block>
     </view>
   </view>
+  <!-- 播放器 -->
+  <block wx:if="{{currentSong.id || isPlaying}}">
+    <player-tabBar currentSong="{{currentSong}}" isPlaying="{{isPlaying}}" />
+  </block>
 </view>

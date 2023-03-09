@@ -1,6 +1,7 @@
 import {
   getTopMvList
 } from '../../api/video/video'
+import playSongListStore from '../../store/paly-song-store'
 Page({
 
   /**
@@ -11,7 +12,11 @@ Page({
     // 偏移量
     offset: 0,
     // 是否已经全部加载完成
-    hasMore: true
+    hasMore: true,
+    // 当前播放的歌曲
+    currentSong: {},
+    // 播放状态
+    isPlaying: false
   },
 
   /**
@@ -19,6 +24,8 @@ Page({
    */
   onLoad(options) {
     this.getAllVedio()
+    // 获取当前正在播放的歌曲
+    playSongListStore.onStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   },
 
   // 获取所有的视频数据
@@ -58,5 +65,24 @@ Page({
     await this.getAllVedio()
     // 3.等数据加载完成立即关闭下拉刷新的状态  ====> await 阻塞作用
     wx.stopPullDownRefresh()
+  },
+  // =========================== store事件 ================
+  handleGetPlaySongInfos({
+    songDetail,
+    isPlaying
+  }) {
+    if (songDetail) {
+      this.setData({
+        currentSong: songDetail
+      })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({
+        isPlaying
+      })
+    }
+  },
+  onUnload() {
+    playSongListStore.offStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   }
 })

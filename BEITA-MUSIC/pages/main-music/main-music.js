@@ -158,10 +158,6 @@ Page({
     playSongListStore.setState('playSongListIndex', index)
   },
 
-  // 播放欄中，切換歌曲的播放狀態
-  toggleCurrentPlayStatus() {
-    playSongListStore.dispatch('changeMusicStatusAction')
-  },
 
   // 獲取倉庫中播放器音樂的數據
   handleGetPlaySongInfos({
@@ -180,12 +176,7 @@ Page({
     }
   },
 
-  // 點擊播放欄，跳轉到播放器頁面
-  handleToPlayer() {
-    wx.navigateTo({
-      url: '/packagePlayer/pages/player-music/player-music',
-    })
-  },
+
 
   onUnload() {
     recommendStore.offState("recommendMusicInfo", (value) => {
