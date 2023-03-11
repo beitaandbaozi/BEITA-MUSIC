@@ -17,7 +17,7 @@
     </block>
   </view>
   <!-- 推荐歌曲 -->
-  <view class="recommend">
+  <view class="recommend-music">
     <area-header title="推荐歌曲" bind:toMoreMusic="handleToMoreMusic" />
     <block wx:if="{{recommendList.length}}">
       <view class="recommend-list">
@@ -42,14 +42,19 @@
   </view>
 
   <!-- 巅峰榜 -->
-  <block wx:if="{{isRankingInfoFlag}}">
-    <view class="ranking-list">
-      <area-header title="巅峰榜" hasMore="{{false}}" />
+  <view class="ranking-list">
+    <area-header title="巅峰榜" hasMore="{{false}}" />
+    <block wx:if="{{isRankingInfoFlag}}">
       <block wx:for="{{rankingInfo}}" wx:key="name">
         <ranking-item itemData="{{item}}" key="{{index}}" />
       </block>
-    </view>
-  </block>
+    </block>
+    <block wx:else="{{!isRankingInfoFlag}}">
+      <view class="ranking-skeleton" wx:for="{{3}}" wx:key="*this">
+        <van-skeleton row="3" />
+      </view>
+    </block>
+  </view>
 
   <!-- 播放器 -->
   <block wx:if="{{currentSong.id || isPlaying}}">

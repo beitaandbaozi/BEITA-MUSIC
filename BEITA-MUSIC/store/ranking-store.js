@@ -9,6 +9,10 @@ import {
   getRecommendList
 } from '../api/music/music'
 
+import {
+  useLazyData
+} from '../utils/common'
+
 // 映射关系
 const rankingMap = {
   newRanking: 3779629,
@@ -30,7 +34,7 @@ const rankingStore = new HYEventStore({
         // 获取对应的映射id
         const id = rankingMap[key]
         // 获取请求
-        getRecommendList(id).then(res => {
+        useLazyData('.ranking-list', () => getRecommendList(id)).then(res => {
           ctx[key] = res.playlist
         })
       }

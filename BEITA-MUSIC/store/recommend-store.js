@@ -8,6 +8,9 @@ import {
 import {
   getRecommendList
 } from '../api/music/music'
+import {
+  useLazyData
+} from '../utils/common'
 
 
 const recommendStore = new HYEventStore({
@@ -17,7 +20,7 @@ const recommendStore = new HYEventStore({
   actions: {
     // 获取推荐歌曲
     fetchRecommendMusicList(ctx) {
-      getRecommendList().then(res => {
+      useLazyData('.recommend-music', getRecommendList).then(res => {
         ctx.recommendMusicInfo = res.playlist
       })
     }

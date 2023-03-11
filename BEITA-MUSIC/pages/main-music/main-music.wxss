@@ -18,3 +18,7 @@ page {
 .main-music .banner .item .image {
   width: 100%;
 }
+
+.main-music .ranking-list .ranking-skeleton {
+  margin-top: 20rpx;
+}
