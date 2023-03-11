@@ -28,10 +28,10 @@
   </view>
 
   <!-- 热门歌单 -->
-  <block wx:if="{{hotMusicList.length}}">
+  <view class="hot-music-menu">
     <menu-area title="热门歌单" musicList="{{hotMusicList}}" />
-  </block>
-
+  </view>
+  
   <!-- 推荐歌单 -->
   <block wx:if="{{recommendMusicList.length}}">
     <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />

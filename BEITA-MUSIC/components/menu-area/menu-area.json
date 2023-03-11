@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "area-header": "/components/area-header/area-header",
-    "menu-item": "/components/menu-item/menu-item"
+    "menu-item": "/components/menu-item/menu-item",
+    "van-skeleton": "@vant/weapp/skeleton/index"
   }
 }

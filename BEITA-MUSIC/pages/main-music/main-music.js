@@ -70,8 +70,8 @@ Page({
       })
     })
     // 获取热门歌单列表
-    getHotMuiscList().then(res => {
-      this.setData({
+    useLazyData('.hot-music-menu', getHotMuiscList).then(res => {
+        this.setData({
         hotMusicList: res.playlists
       })
     })
@@ -158,7 +158,6 @@ Page({
     playSongListStore.setState('playSongListIndex', index)
   },
 
-
   // 獲取倉庫中播放器音樂的數據
   handleGetPlaySongInfos({
     songDetail,
@@ -176,8 +175,7 @@ Page({
     }
   },
 
-
-
+ 
   onUnload() {
     recommendStore.offState("recommendMusicInfo", (value) => {
       if (!value.tracks) return

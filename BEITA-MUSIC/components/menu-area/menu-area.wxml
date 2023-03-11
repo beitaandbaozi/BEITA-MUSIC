@@ -1,10 +1,16 @@
 <view class="menu-area">
   <area-header title="{{title}}" bind:toMoreMusic="handleToMore" />
-  <scroll-view scroll-x enable-flex class="music-scroll" style="width:{{screenWidth}}px">
-    <block wx:for="{{musicList}}" wx:key="id">
-      <view class="item">
-        <menu-item itemData="{{item}}" />
-      </view>
-    </block>
-  </scroll-view>
+  <!-- 数据还没渲染时，使用骨架屏 -->
+  <block wx:if="{{musicList.length}}">
+    <scroll-view scroll-x enable-flex class="music-scroll" style="width:{{screenWidth}}px">
+      <block wx:for="{{musicList}}" wx:key="id">
+        <view class="item">
+          <menu-item itemData="{{item}}" />
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+  <block wx:else="{{musicList.length < 0}}">
+    <van-skeleton row="3" />
+  </block>
 </view>
