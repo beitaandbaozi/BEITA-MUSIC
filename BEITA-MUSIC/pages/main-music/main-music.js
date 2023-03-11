@@ -55,7 +55,7 @@ Page({
   // 获取页面请求数据
   featchData() {
     // 获取轮播图数据
-    getBunnerList().then(res => {
+    useLazyData('.swiper-data', getBunnerList).then(res => {
       this.setData({
         bannerList: res.banners
       })
