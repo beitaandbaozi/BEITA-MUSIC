@@ -31,11 +31,11 @@
   <view class="hot-music-menu">
     <menu-area title="热门歌单" musicList="{{hotMusicList}}" />
   </view>
-  
+
   <!-- 推荐歌单 -->
-  <block wx:if="{{recommendMusicList.length}}">
-    <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />
-  </block>
+  <view class="recommend-music-menu">
+     <menu-area title="推荐歌单" musicList="{{recommendMusicList}}" />
+  </view>
 
   <!-- 巅峰榜 -->
   <block wx:if="{{isRankingInfoFlag}}">

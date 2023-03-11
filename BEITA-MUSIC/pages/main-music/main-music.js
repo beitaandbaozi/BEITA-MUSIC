@@ -71,12 +71,12 @@ Page({
     })
     // 获取热门歌单列表
     useLazyData('.hot-music-menu', getHotMuiscList).then(res => {
-        this.setData({
+      this.setData({
         hotMusicList: res.playlists
       })
     })
     // 获取推荐歌单列表
-    getHotMuiscList("流行").then(res => {
+    useLazyData('.recommend-music-menu', () => getHotMuiscList('流行')).then(res => {
       this.setData({
         recommendMusicList: res.playlists
       })
@@ -175,7 +175,7 @@ Page({
     }
   },
 
- 
+
   onUnload() {
     recommendStore.offState("recommendMusicInfo", (value) => {
       if (!value.tracks) return
