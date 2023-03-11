@@ -18,20 +18,3 @@ page {
 .main-music .banner .item .image {
   width: 100%;
 }
-
-.hot-music-scroll {
-  /* display: flex; */
-  margin-left: -24rpx;
-  white-space: nowrap;
-}
-
-.hot-music-scroll .item {
-  /* flex-shrink: 0; */
-  display: inline-block;
-  width: 220rpx;
-  margin-left: 24rpx;
-}
-
-.hot-music-scroll .item:last-of-type {
-  margin-right: 24rpx;
-}
