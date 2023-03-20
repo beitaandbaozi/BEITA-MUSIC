@@ -1,6 +1,5 @@
 import {
-  getHotSearchData,
-  getSearchData
+  getHotSearchData
 } from '../../api/search/search'
 import playSongListStore from '../../store/paly-song-store'
 Page({
@@ -36,8 +35,12 @@ Page({
   handleSearch() {
     // 搜索的内容
     const keywords = this.data.searchValue;
-    getSearchData(keywords).then(res => {
-      console.log(res)
+    if(keywords.length === 0)  return  wx.showToast({
+      title: '内容不能为空',
+    })
+    // 跳转到详情页
+    wx.navigateTo({
+      url: `/pages/search-data/search-data?keywords=${keywords}`,
     })
   },
   // =========================== store事件 ================

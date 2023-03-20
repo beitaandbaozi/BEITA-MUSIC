@@ -6,8 +6,9 @@
     <view>{{itemData.name}}</view>
     <view class="source">
       <image class="icon" src="/assets/images/icons/sq_icon.png" mode="widthFix" />
-      <text>{{format.formatSinger(itemData.ar)}}</text>
+      <text>{{itemData.ar ? format.formatSinger(itemData.ar) : format.formatSinger(itemData.artists[0].name)}}</text>
+      {{itemData.artists[0].name}}
     </view>
   </view>
-  <van-icon name="more-o" class="icon" catchtap="handleMoreIconTap"/>
+  <van-icon name="more-o" class="icon" catchtap="handleMoreIconTap" />
 </view>

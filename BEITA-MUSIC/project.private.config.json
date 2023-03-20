@@ -70,6 +70,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "搜索结果页面",
+          "pathName": "pages/search-data/search-data",
+          "query": "keywords=NINEONE",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

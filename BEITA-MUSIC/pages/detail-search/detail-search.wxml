@@ -1,6 +1,6 @@
 <view class="detail-search">
   <!-- 搜索框 -->
-  <van-search value="{{ searchValue }}" shape="round" background="#f3f3f3" placeholder="请输入搜索内容" use-action-slot>
+  <van-search model:value="{{ searchValue }}" shape="round" background="#f3f3f3" placeholder="请输入搜索内容" use-action-slot>
     <view slot="action" class="search-btn" bindtap="handleSearch">搜索</view>
   </van-search>
   <!-- 搜索历史 -->

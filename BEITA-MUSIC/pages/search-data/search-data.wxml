@@ -1,0 +1,12 @@
+<view class="search-data">
+  <block wx:if="{{searchDataList.length > 0}}">
+    <block wx:for="{{searchDataList}}" wx:key="id">
+      <song-item itemData="{{item}}" index="{{index + 1}}" data-index="{{index}}" />
+    </block>
+  </block>
+  <block wx:else="{{searchDataList.length < 0}}">
+    <view class="skeleton">
+      <van-skeleton title avatar row="3" />
+    </view>
+  </block>
+</view>

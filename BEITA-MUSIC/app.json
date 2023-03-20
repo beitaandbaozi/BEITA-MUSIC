@@ -5,7 +5,8 @@
     "pages/detail-search/detail-search",
     "pages/detail-song/detail-song",
     "pages/menu-more/menu-more",
-    "pages/main-profile/main-profile"
+    "pages/main-profile/main-profile",
+    "pages/search-data/search-data"
   ],
   "subpackages": [
     {

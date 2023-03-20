@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "song-item": "/components/song-item/song-item",
+    "van-skeleton": "@vant/weapp/skeleton/index"
+  },
+  "navigationBarTitleText": "搜索结果",
+  "enablePullDownRefresh": true
+}

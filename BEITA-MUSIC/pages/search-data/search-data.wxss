@@ -1,0 +1,4 @@
+.skeleton {
+  margin-top: 40rpx;
+  padding: 20rpx;
+}

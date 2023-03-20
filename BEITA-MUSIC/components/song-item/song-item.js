@@ -25,7 +25,8 @@ Component({
     // 我的歌单数据
     menuList: {
       type: Array,
-      value: []
+      value: [],
+      required: false
     }
   },
 
