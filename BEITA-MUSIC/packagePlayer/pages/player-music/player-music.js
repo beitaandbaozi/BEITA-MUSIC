@@ -1,4 +1,6 @@
-import { beitaThrottle } from "../../../utils/common";
+import {
+  beitaThrottle
+} from "../../../utils/common";
 
 import playSongListStore, {
   audioContext,
@@ -66,7 +68,9 @@ Page({
    */
   onLoad(options) {
     // 接收传递过来的id值  ===> 根据id值获取歌曲详情和歌词
-    const { id } = options;
+    const {
+      id
+    } = options;
     // 0.更改轮播图高度(获取设备信息)
     this.setData({
       swiperHeight: app.globalData.contentHeight,
@@ -166,7 +170,10 @@ Page({
   // ============================== store中的響應======================
 
   // 获取仓库中的歌曲列表以及对应的索引
-  handleGetPlaySongInfos({ playSongList, playSongListIndex }) {
+  handleGetPlaySongInfos({
+    playSongList,
+    playSongListIndex
+  }) {
     if (playSongList) {
       this.setData({
         playSongList,

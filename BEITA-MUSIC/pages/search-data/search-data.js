@@ -1,6 +1,7 @@
 import {
   getSearchData
 } from '../../api/search/search'
+import playSongListStore from '../../store/paly-song-store'
 
 Page({
   data: {
@@ -45,6 +46,7 @@ Page({
     })
     // 3. 更改offset的值
     this.data.offset = this.data.searchDataList.length
+
   },
   // 上拉加载
   onReachBottom() {
@@ -63,4 +65,12 @@ Page({
     // 3.等数据加载完成立即关闭下拉刷新的状态  ====> await 阻塞作用
     wx.stopPullDownRefresh()
   },
+  // 点击跳转到播放器进行仓库存储操作
+  handleToPlayer(event) {
+    const index = event.currentTarget.dataset.index
+    playSongListStore.setState('playSongList', this.data.searchDataList)
+    playSongListStore.setState('playSongListIndex', index)
+    console.log('====')
+  }
+
 })

@@ -1,7 +1,7 @@
 <view class="search-data">
   <block wx:if="{{searchDataList.length > 0}}">
     <block wx:for="{{searchDataList}}" wx:key="id">
-      <song-item itemData="{{item}}" index="{{index + 1}}" data-index="{{index}}" />
+      <song-item itemData="{{item}}" index="{{index + 1}}" data-index="{{index}}" bindtap="handleToPlayer"/>
     </block>
   </block>
   <block wx:else="{{searchDataList.length < 0}}">
