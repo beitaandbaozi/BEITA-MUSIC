@@ -32,16 +32,27 @@ Page({
     })
   },
   // 搜索功能
-  handleSearch() {
-    // 搜索的内容
-    const keywords = this.data.searchValue;
-    if(keywords.length === 0)  return  wx.showToast({
+  fetchSearch(keywords) {
+    if (keywords.length === 0) return wx.showToast({
       title: '内容不能为空',
     })
     // 跳转到详情页
     wx.navigateTo({
       url: `/pages/search-data/search-data?keywords=${keywords}`,
     })
+  },
+  // 点击搜索
+  handleSearch() {
+    const keywords = this.data.searchValue
+    this.fetchSearch(keywords)
+    this.setData({
+      searchValue: ""
+    })
+  },
+  // 点击猜你喜欢中的数据，进行搜索
+  handleToSearch(event) {
+    const keywords = event.currentTarget.dataset.keywords
+    this.fetchSearch(keywords)
   },
   // =========================== store事件 ================
   handleGetPlaySongInfos({

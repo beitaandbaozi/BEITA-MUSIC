@@ -10,7 +10,7 @@
     <view class="title">猜你喜欢</view>
     <view class="list">
       <block wx:for="{{hotSearchDataList}}" wx:key="first">
-        <text class="item">{{item.first}}</text>
+        <text class="item" bindtap="handleToSearch" data-keywords="{{item.first}}">{{item.first}}</text>
       </block>
     </view>
   </view>
