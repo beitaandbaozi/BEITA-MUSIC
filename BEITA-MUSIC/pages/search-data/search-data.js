@@ -12,7 +12,11 @@ Page({
     // 偏移量 ====> 分页加载
     offset: 0,
     // 是否已经加载完毕
-    hasMore: true
+    hasMore: true,
+    // 当前播放器播放歌曲
+    currentSong: {},
+    // 当前是否有在播放歌曲
+    isPlaying: false
   },
 
   /**
@@ -24,6 +28,8 @@ Page({
       keywords
     })
     this.fetchSearchData(keywords, this.data.offset)
+    // 獲取播放器數據
+    playSongListStore.onStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   },
 
   // ========================== 事件响应 ==========================
@@ -71,6 +77,26 @@ Page({
     playSongListStore.setState('playSongList', this.data.searchDataList)
     playSongListStore.setState('playSongListIndex', index)
     console.log('====')
+  },
+  //  ========================== store事件处理 ==============
+  // 獲取倉庫中播放器音樂的數據
+  handleGetPlaySongInfos({
+    songDetail,
+    isPlaying
+  }) {
+    if (songDetail) {
+      this.setData({
+        currentSong: songDetail
+      })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({
+        isPlaying
+      })
+    }
+  },
+  onUnload() {
+    playSongListStore.offStates(['songDetail', 'isPlaying'], this.handleGetPlaySongInfos)
   }
 
 })

@@ -9,4 +9,8 @@
       <van-skeleton title avatar row="3" />
     </view>
   </block>
+  <!-- 播放器 -->
+  <block wx:if="{{currentSong.id || isPlaying}}">
+    <player-tabBar currentSong="{{currentSong}}" isPlaying="{{isPlaying}}" />
+  </block>
 </view>

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "song-item": "/components/song-item/song-item",
+    "player-tabBar": "/components/player-tabBar/player-tabBar",
     "van-skeleton": "@vant/weapp/skeleton/index"
   },
   "navigationBarTitleText": "搜索结果",
