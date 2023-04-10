@@ -1,4 +1,3 @@
-// app.js
 App({
   globalData: {
     screenWidth: 375,
@@ -21,6 +20,6 @@ App({
       }
     })
     // 注册云开发
-    wx.cloud.init()
+    // wx.cloud.init()
   }
 })

@@ -2,9 +2,9 @@
 import {
   HYEventStore
 } from 'hy-event-store'
-import {
-  menuCollection
-} from '../database/index'
+// import {
+//   menuCollection
+// } from '../database/index'
 
 const menuStore = new HYEventStore({
   state: {
@@ -15,9 +15,10 @@ const menuStore = new HYEventStore({
     // 获取歌单数据
     async fetchMenuListAction(ctx) {
       // 1.获取数据库中对应用户的歌单数据
-      const res = await menuCollection.query()
+      // const res = await menuCollection.query()
       // 2.赋值
-      ctx.menuList = res.data
+      // ctx.menuList = res.data
+      ctx.menuList = null
     }
   }
 })
