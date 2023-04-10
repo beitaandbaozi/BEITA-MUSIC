@@ -1,6 +1,6 @@
-import {
-  menuCollection
-} from '../../database/index'
+// import {
+//   menuCollection
+// } from '../../database/index'
 import menuStore from '../../store/menu-store'
 Component({
   /**
@@ -29,7 +29,7 @@ Component({
       // 获取当前歌单的_id
       const _id = this.properties.itemData._id
       // 连接数据库删除数据
-      const res = await menuCollection.remove(_id)
+      // const res = await menuCollection.remove(_id)
       // 提示信息
       if(res) {
         wx.showToast({

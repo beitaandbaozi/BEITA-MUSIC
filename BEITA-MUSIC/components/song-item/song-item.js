@@ -1,13 +1,13 @@
 // 连接数据库
-import {
-  favorCollection,
-  likeCollection
-} from '../../database/index'
+// import {
+//   favorCollection,
+//   likeCollection
+// } from '../../database/index'
 
-import {
-  database,
-  menuCollection
-} from '../../database/index'
+// import {
+//   database,
+//   menuCollection
+// } from '../../database/index'
 
 Component({
   /**
@@ -64,11 +64,11 @@ Component({
       switch (index) {
         // 收藏
         case 0:
-          res = await favorCollection.add(this.properties.itemData)
+          // res = await favorCollection.add(this.properties.itemData)
           break;
           // 喜爱
         case 1:
-          res = await likeCollection.add(this.properties.itemData)
+          // res = await likeCollection.add(this.properties.itemData)
           break;
           // 添加到歌单
         case 2:
@@ -97,10 +97,10 @@ Component({
       const menuItem = this.properties.menuList[index]
       const data = this.properties.itemData
       // 2.将歌曲添加到对应的歌单
-      const cmd = database.command
-      const res = await menuCollection.update(menuItem._id, {
-        songList: cmd.push(data)
-      })
+      // const cmd = database.command
+      // const res = await menuCollection.update(menuItem._id, {
+      //   songList: cmd.push(data)
+      // })
 
       if (res) {
         wx.showToast({

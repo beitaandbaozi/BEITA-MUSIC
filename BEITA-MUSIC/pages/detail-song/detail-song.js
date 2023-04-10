@@ -6,10 +6,10 @@ import menuStore from '../../store/menu-store'
 import {
   getRecommendList
 } from '../../api/music/music'
-import {
-  database,
-  menuCollection
-} from '../../database/index'
+// import {
+//   database,
+//   menuCollection
+// } from '../../database/index'
 // 连接数据库
 Page({
   data: {
@@ -93,17 +93,17 @@ Page({
   // 处理个人中心tabs数据
   async handleProfileTabInfo(tabname, title) {
     // 1.获取对应的集合
-    const collection = database.collection(`c_${tabname}`)
+    // const collection = database.collection(`c_${tabname}`)
     // 2.获取对应的数据
-    const res = await collection.where({
-      _openid: wx.getStorageSync('openId')
-    }).get()
-    this.setData({
-      musicList: {
-        name: title,
-        tracks: res.data
-      }
-    })
+    // const res = await collection.where({
+    //   _openid: wx.getStorageSync('openId')
+    // }).get()
+    // this.setData({
+    //   musicList: {
+    //     name: title,
+    //     tracks: res.data
+    //   }
+    // })
     // 3.设置对应的导航标题
     wx.setNavigationBarTitle({
       title

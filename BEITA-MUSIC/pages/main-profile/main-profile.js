@@ -1,6 +1,6 @@
-import {
-  menuCollection
-} from '../../database/index'
+// import {
+//   menuCollection
+// } from '../../database/index'
 import menuStore from '../../store/menu-store'
 import playSongListStore from '../../store/paly-song-store'
 Page({
@@ -96,15 +96,15 @@ Page({
       songList: []
     }
     // 3.连接数据库
-    const res = await menuCollection.add(menuRecord)
+    // const res = await menuCollection.add(menuRecord)
     // 4.提示信息
-    if (res) {
-      wx.showToast({
-        title: `创建歌单成功`,
-      })
-      // 重新获取数据库信息，刷新页面数据
-      menuStore.dispatch("fetchMenuListAction")
-    }
+    // if (res) {
+    //   wx.showToast({
+    //     title: `创建歌单成功`,
+    //   })
+    //   // 重新获取数据库信息，刷新页面数据
+    //   menuStore.dispatch("fetchMenuListAction")
+    // }
   },
   // 点击歌单跳转到详情页面
   handleToMenuSingDetail(event) {
