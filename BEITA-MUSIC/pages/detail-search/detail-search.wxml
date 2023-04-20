@@ -3,6 +3,25 @@
   <van-search model:value="{{ searchValue }}" shape="round" background="#f3f3f3" placeholder="请输入搜索内容" use-action-slot>
     <view slot="action" class="search-btn" bindtap="handleSearch">搜索</view>
   </van-search>
+  <!-- 搜索tab -->
+  <view class="type-group">
+    <view class="group">
+      <image src="../../assets/images/search/singer.png" mode="widthFix" class="icon" />
+      <text>歌手</text>
+    </view>
+    <view class="group">
+      <image src="../../assets/images/search/sing.png" mode="widthFix" class="icon" />
+      <text>歌曲</text>
+    </view>
+    <view class="group">
+      <image src="../../assets/images/search/mv.png" mode="widthFix" class="icon" />
+      <text>MV</text>
+    </view>
+    <view class="group">
+      <image src="../../assets/images/search/area.png" mode="widthFix" class="icon" />
+      <text>专区</text>
+    </view>
+  </view>
   <!-- 搜索历史 -->
   <view class="section search-history"></view>
   <!-- 猜你喜欢 -->

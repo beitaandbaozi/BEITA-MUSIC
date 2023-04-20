@@ -35,3 +35,25 @@ page {
   color: #c8c9cc;
   font-size: 26rpx;
 }
+
+.type-group {
+  margin: 20rpx 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.type-group .group  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.type-group .group .icon{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.type-group .group text {
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  color: #000;
+}
