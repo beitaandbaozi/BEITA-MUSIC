@@ -5,21 +5,9 @@
   </van-search>
   <!-- 搜索tab -->
   <view class="type-group">
-    <view class="group">
-      <image src="../../assets/images/search/singer.png" mode="widthFix" class="icon" />
-      <text>歌手</text>
-    </view>
-    <view class="group">
-      <image src="../../assets/images/search/sing.png" mode="widthFix" class="icon" />
-      <text>歌曲</text>
-    </view>
-    <view class="group">
-      <image src="../../assets/images/search/mv.png" mode="widthFix" class="icon" />
-      <text>MV</text>
-    </view>
-    <view class="group">
-      <image src="../../assets/images/search/area.png" mode="widthFix" class="icon" />
-      <text>专区</text>
+    <view class="group" wx:for="{{tapGroup}}" wx:key="type" data-type="{{index}}" bindtap="handleToTapDetail">
+      <image src="../../assets/images/search/{{item.type}}.png" mode="widthFix" class="icon" />
+      <text>{{item.name}}</text>
     </view>
   </view>
   <!-- 搜索历史 -->
