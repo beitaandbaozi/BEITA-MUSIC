@@ -23,3 +23,19 @@ export const getSearchData = (keywords, offset = 0, limit = 30, type = 1) => {
     type
   })
 }
+
+/**
+ * 获取电台分类列表
+ */
+export const getDjCatelist = () => {
+  return beitaRequest.get("/dj/catelist")
+}
+
+/**
+ * 根据rid获取对应分类内容
+ */
+export const getDjContent = (id) => {
+  return beitaRequest.get("/dj/detail", {
+    rid: id
+  })
+}

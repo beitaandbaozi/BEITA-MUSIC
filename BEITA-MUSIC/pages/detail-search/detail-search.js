@@ -19,7 +19,7 @@ Page({
       },
       {
         type: 'sing',
-        name: '曲风'
+        name: '电台'
       },
       {
         type: 'mv',
@@ -75,7 +75,7 @@ Page({
   // 歌手、曲风、MV、专区点击跳转
   handleToTapDetail(event) {
     // 获取对应的分类
-    // 0：歌手  1：曲风  2：MV 3：专区
+    // 0：歌手  1：电台  2：MV 3：专区
     const type = event.currentTarget.dataset.type
     switch (type) {
       case 0:

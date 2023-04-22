@@ -1,66 +1,57 @@
-// pages/search-sing-detail/search-sing-detail.js
+import {
+  getDjCatelist,
+  getDjContent
+} from "../../api/search/search"
+const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    // 主要内容高度
+    mainHeight: 0,
+    // 电台分类列表
+    djCateList: [],
+    // 电台对应内容
+    djContent: []
+  },
+  onLoad() {
+    this.setData({
+      mainHeight: app.globalData.contentHeight,
+    });
+    this.fetchData()
+  },
+  // ==================== 事件响应 ===============
+  async fetchData() {
+    await this.fetchDjCatelist()
+    await this.fetchDjContent(this.data.djCateList[0].id)
+  },
+  // 获取电台分类列表数据
+  async fetchDjCatelist() {
+    const res = await getDjCatelist()
+    // 处理数据
+    if (res.categories) {
+      const newList = res.categories.map(obj => ({
+        id: obj.id,
+        name: obj.name
+      }));
+      this.setData({
+        djCateList: newList
+      })
+    }
+  },
+  // 根据rid获取对应分类内容
+  fetchDjContent(id) {
+    getDjContent(id).then(res => {
+      this.setData({
+        djContent: res.data
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  // 切换tab
+  onChange(event) {
+    const id = event.currentTarget.dataset.rid
+    this.fetchDjContent(id)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  handleNavBack() {
+    wx.navigateBack()
   }
 })

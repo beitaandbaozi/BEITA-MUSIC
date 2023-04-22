@@ -77,6 +77,13 @@
           "query": "keywords=NINEONE",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "曲风",
+          "pathName": "pages/search-sing-detail/search-sing-detail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

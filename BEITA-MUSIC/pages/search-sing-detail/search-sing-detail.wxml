@@ -1,2 +1,49 @@
-<!--pages/search-sing-detail/search-sing-detail.wxml-->
-<text>pages/search-sing-detail/search-sing-detail.wxml</text>
+<view class="search-sing-detail">
+  <!-- 自定义导航栏 -->
+  <nav-bar bind:leftclick="handleNavBack" class="sing-nav-bar">
+    <view class="tab" slot="center">电台分类</view>
+  </nav-bar>
+  <!-- 主要内容 -->
+  <view class="main-container" style="height:{{mainHeight}}px">
+    <!-- 左侧导航 -->
+    <view class="left-nav">
+      <scroll-view scroll-y class="scroll-container">
+        <van-sidebar>
+          <block wx:for="{{djCateList}}" wx:key="id">
+            <van-sidebar-item title="{{item.name}}" bindtap="onChange" data-rid="{{item.id}}"/>
+          </block>
+        </van-sidebar>
+      </scroll-view>
+    </view>
+    <!-- 右侧对应内容 -->
+    <block wx:if="{{djContent.id !== null}}">
+      <view class="content">
+        <view class="info">
+          <image src="{{djContent.picUrl}}" class="header-img" />
+          <view class="data">
+            <view class="title">{{djContent.name}}</view>
+            <view class="author">
+              <image src="{{djContent.dj.avatarUrl}}" class="author-img" />
+              <text>{{djContent.dj.nickname}}</text>
+            </view>
+            <view class="desc">{{djContent.desc}}</view>
+          </view>
+        </view>
+        <!-- 列表数据 -->
+        <view class="comment-data-list">
+          <block wx:for="{{djContent.commentDatas}}" wx:key="programId">
+            <view class="comment-data">
+              <view class="infos">
+                <image src="{{item.userProfile.backgroundUrl}}" mode="aspectFill" class="comment-img" />
+                <text>{{item.content}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{djContent.id === null}}">
+      🤣👉😵
+    </block>
+  </view>
+</view>

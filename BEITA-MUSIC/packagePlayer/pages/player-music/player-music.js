@@ -48,6 +48,7 @@ Page({
     playModeName: "order",
     // 歌曲是否播放
     isPlaying: false,
+    pageNavTitle:['歌曲', '歌词'],
 
     // 倉庫中的key值
     storeKeys: [
