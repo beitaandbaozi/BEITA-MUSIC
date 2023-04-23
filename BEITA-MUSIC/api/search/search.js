@@ -39,3 +39,19 @@ export const getDjContent = (id) => {
     rid: id
   })
 }
+
+/**
+ * 歌手分类列表
+ * 可选参数 
+ * limit : 返回数量 , 默认为 30
+ * offset : 偏移数量，用于分页 , 如:(页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+ * initial: 按首字母索引查找参数,如 /artist/list?type=1&area=96&initial=b 返回内容将以 name 字段开头为 b 或者拼音开头为 b 为顺序排列
+ */
+export const getArtistList = (type, area, offset = 0, limit = 30) => {
+  return beitaRequest.get("/artist/list", {
+    type,
+    area,
+    offset,
+    limit
+  })
+}

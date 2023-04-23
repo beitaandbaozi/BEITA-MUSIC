@@ -1,2 +1,29 @@
-<!--pages/search-singer-detail/search-singer-detail.wxml-->
-<text>pages/search-singer-detail/search-singer-detail.wxml</text>
+<view class="search-singer-detail">
+  <!-- 歌手分类 -->
+  <view class="singer-type">
+    <block wx:for="{{singerTypeList}}" wx:key="id">
+      <text class="type {{currentSingerIndex === index ? 'active' : ''}}" data-index="{{index}}" data-id="{{item.id}}" bindtap="handleSelectSinger">{{item.name}}</text>
+    </block>
+  </view>
+  <!-- 地区分类 -->
+  <view class="area-type">
+    <block wx:for="{{areaTypeList}}" wx:key="id">
+      <text class="type {{currentAreaIndex === index ? 'active' : ''}}" data-index="{{index}}" data-id="{{item.id}}" bindtap="handleSelectArea">{{item.name}}</text>
+    </block>
+  </view>
+  <!-- 数据展示 -->
+  <view class="data-list">
+    <block wx:for="{{dataList}}" wx:key="id">
+      <view class="data">
+        <!-- 懒加载图片 -->
+        <block wx:if="{{item.img1v1Url.length > 0}}">
+          <image src="{{item.img1v1Url}}" mode="widthFix" class="avatar-img" />
+        </block>
+        <block wx:if="{{item.img1v1Url.length < 0}}">
+          <image src="../../assets/images/search/avatar.png" mode="widthFix" class="avatar-img" />
+        </block>
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+</view>

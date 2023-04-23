@@ -1,1 +1,58 @@
-/* pages/search-singer-detail/search-singer-detail.wxss */
+page {
+  background-color: rgba(176, 196, 222, 0.877);
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.singer-type,
+.area-type {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.area-type {
+  margin-top: 20rpx;
+}
+
+.singer-type .type,
+.area-type .type {
+  color: #fff;
+  font-size: 30rpx;
+  margin: 0 20rpx;
+}
+
+.singer-type .active,
+.area-type .active {
+  color: lightseagreen;
+}
+
+.data-list {
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.data {
+  display: flex;
+  width: 25%;
+  height: 200rpx;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data .avatar-img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+}
+
+.data text {
+  margin-top: 20rpx;
+  color: #fff;
+  font-size: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
